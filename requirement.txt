@@ -1,0 +1,20 @@
+Landing Page.
+
+Can refer : https://www.btmresources.com.my/
+
+Page :
+1. About Us
+2. Our Portfolio
+3. Services
+4. Contact us
+
+
+Information regarding the company :
+Offer wide range of construction solution - dari repair rumah to buat rumah/building
+
+Company name : AA Expert Solution
+Logo : check repo
+Address : Letak je Kajang, Selangor 
+
+
+If had a better design or additional stuff to add into the website, dipersilakan, go ahead aku on je
