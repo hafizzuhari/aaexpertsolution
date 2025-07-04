@@ -6,9 +6,11 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://www.aaexpertsolution.com',
   vite: {
     plugins: [tailwindcss()]
   }
+  
   // ssr
   // output: "server",
   // adapter: node({
