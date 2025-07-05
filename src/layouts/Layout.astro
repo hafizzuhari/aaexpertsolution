@@ -9,11 +9,7 @@ const { title, link, meta } = metaTags;
   <head>
     <title>{title}</title>
 
-	{
-		Object.entries(link).map(([rel, href]) => (
-			<link rel={rel} href={href} />
-		))
-	}
+    {Object.entries(link).map(([rel, href]) => <link rel={rel} href={href} />)}
 
     {
       Object.entries(meta).map(([name, content]) => (
