@@ -1,16 +1,78 @@
 ---
-import "../styles/global.css";
+import { metaTags } from "../data/metaTags";
+
+const { title, link, meta } = metaTags;
 ---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang="en" data-theme="aa-expert">
+  <head>
+    <title>{title}</title>
+
+	{
+		Object.entries(link).map(([rel, href]) => (
+			<link rel={rel} href={href} />
+		))
+	}
+
+    {
+      Object.entries(meta).map(([name, content]) => (
+        <meta name={name} content={content} />
+      ))
+    }
+  </head>
+  <body>
+    <slot />
+  </body>
 </html>
+
+<style>
+  @import "tailwindcss";
+  @plugin "daisyui";
+  @plugin "daisyui/theme" {
+    name: "aa-expert";
+    default: false;
+    prefersdark: false;
+    color-scheme: "light";
+
+    --color-base-100: #f5f2ec;
+    --color-base-200: #eae7e0;
+    --color-base-300: #d6d3cc;
+    --color-base-content: #2a2a2a;
+
+    --color-primary: #d2902b;
+    --color-primary-content: #ffffff;
+
+    --color-secondary: #2a2a2a;
+    --color-secondary-content: #ffffff;
+
+    --color-accent: #ffc857;
+    --color-accent-content: #2a2a2a;
+
+    --color-neutral: #333333;
+    --color-neutral-content: #ffffff;
+
+    --color-info: #57a6ff;
+    --color-info-content: #002e5d;
+
+    --color-success: #45b26b;
+    --color-success-content: #ffffff;
+
+    --color-warning: #ffc857;
+    --color-warning-content: #3f2c00;
+
+    --color-error: #d9534f;
+    --color-error-content: #ffffff;
+
+    --radius-selector: 0rem;
+    --radius-field: 0rem;
+    --radius-box: 0rem;
+
+    --size-selector: 0.25rem;
+    --size-field: 0.25rem;
+
+    --border: 1px;
+    --depth: 0;
+    --noise: 0;
+  }
+</style>
