@@ -3,7 +3,7 @@ export const metaTags = {
 
   link: {
     canonical: "https://www.aaexpertsolution.com/",
-    icon: "public/favicon.jpg",
+    icon: "/public/favicon.jpg",
   },
 
   meta: {
