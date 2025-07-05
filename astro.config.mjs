@@ -1,17 +1,15 @@
 // @ts-check
-import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
-
+import tailwindcss from '@tailwindcss/vite';
 // import node from "@astrojs/node";
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.aaexpertsolution.com',
+  site: 'https://hafizzuhari.github.io',
+  base: 'aaexpertsolution',
   vite: {
     plugins: [tailwindcss()]
   }
-  
-  // ssr
   // output: "server",
   // adapter: node({
   //   mode: "standalone",
