@@ -1,0 +1,17 @@
+---
+import { content } from "../data/content"
+
+const { navLinks } = content;
+---
+
+<nav class="fixed top-0 left-0 z-10 w-full">
+    <div class="flex justify-between p-6">
+        <a href="" class="btn btn-square bg-cover bg-center rounded-none shadow-xl" style={`background-image: url('/favicon.jpg');`}></a>
+        <div class="flex gap-0 shadow-xl">
+            {navLinks.map(navLink => {
+                return <a href="" class="btn rounded-none">{navLink.name}</a>
+            })}
+            <a href="" class="btn btn-primary rounded-none">Ask Us Today!</a>
+        </div>
+    </div>
+</nav>
