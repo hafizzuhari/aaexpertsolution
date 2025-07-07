@@ -1,7 +1,48 @@
 ---
+import { content } from '../data/content';
 import Layout from '../layouts/Layout.astro';
+
+const { sections } = content;
+const { hero, portfolio, services } = sections;
 ---
 
 <Layout>
-    Website under construction... Stay tuned!
+    <div class="aspect-[16/6] overflow-hidden">
+        <div class="carousel h-full w-full">
+            {
+                hero.map((h, index) => {
+                    return <div id={`hero-${index + 1}`} class="carousel-item h-full w-full bg-cover bg-center" style={`background-image: url('${h.image}');`}>
+                        <div class="h-full w-full bg-black/50 flex flex-col justify-center p-12">
+                            <h1 class="text-primary w-1/2 text-6xl m-0">{h.title}</h1>
+                            <p class="text-base-200 w-1/2 text-3xl">{h.subtitle}</p>
+                        </div>
+                    </div>
+                })
+            }
+        </div>
+    </div>
+    <div class="bg-secondary p-12">
+        <h2 class="text-primary text-center">{services.title}</h2>
+        <div class="flex gap-6 w-full">
+            {services.items.map(item => {
+                return <div class="flex-1 p-6 mt-6 bg-neutral group hover:bg-primary">
+                    <i class={`ti ti-${item.icon} text-7xl text-base-200 group-hover:text-secondary`}></i>
+                    <h3 class="text-primary group-hover:text-base-200">{item.name}</h3>
+                    <p class="text-base-200 group-hover:text-secondary">{item.description}</p>
+                </div>
+            })}
+        </div>
+    </div>
+    <div class="bg-base-200 p-12">
+        <h2 class="text-secondary text-center">{portfolio.title}</h2>
+        <div class="flex gap-6 p-6">
+            {portfolio.projects.map(project => {
+                return <div class="flex-1 p-6 shadow-md hover:shadow-xl">
+                    <div class="hw-full aspect-[4/3] bg-cover bg-center" style={`background-image: url('${project.image}');`}></div>
+                    <h3 class="text-center">{project.name}</h3>
+                    <p class="px-6 text-center">{project.description}</p>
+                </div>
+            })}
+        </div>
+    </div>
 </Layout>
