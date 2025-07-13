@@ -1,0 +1,20 @@
+---
+import { contact } from "../content/8-contact"
+
+const { company } = contact;
+---
+<div class="bg-[url(/faq.jpg)] bg-cover bg-center">
+    <div class="p-12 bg-[#2a2a2a]/75 flex flex-col lg:p-16">
+        <div class={`btn btn-square bg-[url(${company.logo})] bg-cover bg-center mb-4 lg:mb-8`}></div>
+        <div class="text-primary font-bold">{company.name}</div>
+        <div class="text-base-200 text-xs mb-4 lg:mb-8">{company.tagline}</div>
+        <div class="flex flex-col gap-2">
+            {contact.items.map(item => {
+                return <div class="flex gap-2 lg:gap-4 items-center">
+                    <i class={`ti ti-${item.icon} text-xl text-primary`}></i>
+                    <span class="text-base-200 text-xs">{item.label}</span>
+                </div>
+            })}
+        </div>
+    </div>
+</div>

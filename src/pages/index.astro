@@ -1,0 +1,122 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { carousel } from "../content/1-carousel";
+import { whyUs } from "../content/2-why-us"
+import { about } from "../content/3-about";
+import { services } from "../content/4-services";
+import { portfolio } from "../content/5-portfolio";
+import { faq } from "../content/6-faq";
+import { testimonials } from "../content/7-testimonials";
+import { contact } from "../content/8-contact"
+---
+
+<Layout>
+    <section class="h-screen">
+        <div class="carousel h-full w-full">
+            {
+                carousel.map((c, index) => {
+                    return (
+                        <div id={`slide-${index}`}
+                            class={`carousel-item h-full w-full bg-[url(${c.backgroundUrl})] bg-cover bg-center relative`}
+                        >
+                            <div class="h-full w-full bg-secondary/50 flex flex-col justify-center items-center p-4">
+                                <h2 class="text-5xl text-center font-bold text-primary mb-4">{c.title}</h2>
+                                <p class="text-lg text-center text-white">{c.subtitle}</p>
+                            </div>
+                            <div class="hidden absolute left-8 right-8 top-1/2 lg:flex -translate-y-1/2 transform justify-between">
+                                <a href={`#slide-${index - 1 < 0 ? carousel.length - 1 : index - 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-left text-secondary"></i></a>
+                                <a href={`#slide-${index + 1 >= carousel.length ? 0 : index + 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-right text-secondary"></i></a>
+                            </div>
+                        </div>
+                    );
+                })
+            }
+        </div>
+    </section>
+    <section class="p-4 py-12 lg:p-16 bg-secondary">
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16">{whyUs.title}</h3>
+        <div class="grid grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-4 lg:gap-8">
+            {
+                whyUs.items.map(item => {
+                    return <div class="p-4 lg:p-8 bg-base-200 shadow-xl">
+                        <i class={`ti ti-${item.icon} text-5xl text-primary`}></i>
+                        <h4 class="font-bold mt-4 lg:mt-8">{item.title}</h4>
+                        <p>{item.description}</p>
+                    </div>
+                })
+            }
+        </div>
+    </section>
+    <section class="p-4 py-12 lg:p-16 bg-base-200">
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16">{about.title}</h3>
+        <p class="text-secondary text-justify">{about.description}</p>
+    </section>
+    <section class="p-4 py-12 lg:p-16 bg-primary">
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg-mb-16 text-secondary">{services.title}</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8">
+            {services.items.map(item => {
+                return <div class="bg-secondary grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
+                    <div class={`row-span-2 bg-[url(${item.image})] bg-cover bg-center lg:h-32`}></div>
+                    <div class="p-4 lg:p-8 items-start justify-start flex flex-col h-full">
+                        <h4 class="text-primary font-bold">{item.name}</h4>
+                        <p class="text-base-200">{item.description}</p>
+                    </div>
+                </div>
+            })}
+        </div>
+    </section>
+    <section class="p-4 py-12 lg:p-16 bg-base-200">
+        <h3 class="text-xl font-bold text-primary text-center text-secondary mb-4 lg:mb-8">{portfolio.title}</h3>
+        <p class="text-secondary text-center mb-12 lg:mb-16">{portfolio.description}</p>
+        <div class="grid grid-cols-1 lg:grid-rows-1 lg:grid-cols-4 gap-4">
+            {portfolio.items.map(item => {
+                return <div class="bg-primary grid grid-cols-1">
+                    <div class={`bg-[url(${item.imageUrl})] aspect-[21/9] bg-cover bg-center`}></div>
+                    <div class="p-4">
+                        <h4 class="font-bold">{item.title}</h4>
+                        <div class="flex gap-2 items-center">
+                            <i class="ti ti-map-pin"></i><span>{item.location}</span>
+                        </div>
+                        <div class="flex gap-2 mt-4 justify-start">
+                            {item.tags.map(tag => {
+                                return <span class="p-2 bg-secondary text-base-200 text-xs">{tag}</span>
+                            })}
+                        </div>
+                    </div>
+                </div>
+            })}
+        </div>
+    </section>
+    <section class="bg-[url(/faq.jpg)] bg-cover bg-center">
+        <div class="bg-secondary/50 p-4 py-12 lg:p-16">
+            <h3 class="text-xl font-bold text-primary text-center text-primary mb-12 lg:mb-16">{faq.title}</h3>
+            {faq.items.map(item => {
+                return <div class="collapse bg-base-100 border border-base-300">
+                    <input type="radio" name="my-accordion-1" checked="checked" />
+                    <div class="collapse-title font-semibold">{item.question}</div>
+                    <div class="collapse-content text-sm">{item.answer}</div>
+                </div>
+            })}
+        </div>
+    </section>
+    <section class="p-4 py-12 lg:p-16 bg-secondary">
+        <h3 class="text-xl font-bold text-primary text-center text-primary mb-12 lg:mb-16">{testimonials.title}</h3>
+        <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 gap-4 lg:gap-8">
+            {testimonials.items.map(item => {
+                return <div class="bg-base-200">
+                    <div class="flex">
+                        <div class={`aspect-square bg-[url(${item.image})] bg-cover bg-center p-8`}></div>
+                        <div class="bg-primary flex-grow-1 p-4">
+                            <span>{item.name}</span>
+                            <div class="text-xs">
+                                <i class="ti ti-map-pin"></i>
+                                <span>{item.location}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-4">"{item.quote}""</div>
+                </div>
+            })}
+        </div>
+    </section>
+</Layout>

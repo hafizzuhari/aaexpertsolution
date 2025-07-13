@@ -1,0 +1,107 @@
+---
+import Nav from "../components/Nav.astro"
+import Footer from "../components/Footer.astro"
+import { openGraph, seo } from "../content/0-seo"
+---
+<!doctype html>
+<html lang="en" data-theme="aa-expert-solution">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/jpg" href="/favicon.jpg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{seo.title}</title>
+		<meta name="description" content={seo.description}>
+		<meta name="keywords" content={seo.keywords}>
+		<meta property="og:title" content={openGraph.title} />
+		<meta property="og:description" content={openGraph.description} />
+		<meta property="og:type" content={openGraph.type} />
+		<meta property="og:url" content={openGraph.url} />
+		<meta property="og:image" content={openGraph.image} />
+		<meta property="og:locale" content={openGraph.locale} />
+		<meta property="og:site_name" content={openGraph.site_name} />
+		<link
+			href="https://cdn.jsdelivr.net/npm/daisyui@5"
+			rel="stylesheet"
+			type="text/css"
+		/>
+		<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"
+		></script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"
+		/>
+	</head>
+	<body>
+		<header>
+			<Nav />
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer>
+			<Footer />
+		</footer>
+	</body>
+</html>
+
+<style>
+	:root:has(input.theme-controller[value=aa-expert-solution]:checked),[data-theme="aa-expert-solution"] {
+		--color-base-100: #f5f2ec;
+		--color-base-200: #eae7e0;
+		--color-base-300: #d6d3cc;
+		--color-base-content: #2a2a2a;
+
+		--color-primary: #d2902b;
+		--color-primary-content: #ffffff;
+
+		--color-secondary: #2a2a2a;
+		--color-secondary-content: #ffffff;
+
+		--color-accent: #ffc857;
+		--color-accent-content: #2a2a2a;
+
+		--color-neutral: #333333;
+		--color-neutral-content: #ffffff;
+
+		--color-info: #57a6ff;
+		--color-info-content: #002e5d;
+
+		--color-success: #45b26b;
+		--color-success-content: #ffffff;
+
+		--color-warning: #ffc857;
+		--color-warning-content: #3f2c00;
+
+		--color-error: #d9534f;
+		--color-error-content: #ffffff;
+
+		/* --radius-selector: 0.5rem;
+		--radius-field: 0.25rem;
+		--radius-box: 0.5rem; */
+
+		--radius-selector: 0rem;
+		--radius-field: 0rem;
+		--radius-box: 0rem;
+
+		--size-selector: 0.25rem;
+		--size-field: 0.25rem;
+
+		--border: 1px;
+		--depth: 1;
+		--noise: 0;
+	}
+
+	* {
+		font-family: "Montserrat", sans-serif;
+		font-optical-sizing: auto;
+		font-weight: <weight>;
+		font-style: normal;
+	}
+</style>
