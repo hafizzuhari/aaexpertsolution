@@ -1,5 +1,5 @@
 export const cta = {
-  title: "Get Started With a Free Consultation",
-  subtitle: "Let us help bring your metalwork ideas to life — get in touch today.",
+  title: "Jom hubungi kami untuk segala jenis tempahan!",
+  subtitle: "Ada idea untuk kerja besi? Biar kami bantu realisasikan, hubungi kami hari ini.",
   buttonText: "Contact Us"
 }
