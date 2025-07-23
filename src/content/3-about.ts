@@ -1,6 +1,6 @@
 export const about = {
-    title: "About AA Expert Solution",
-    description: `AA Expert Solution is a specialized construction and metalworks company dedicated to delivering high-quality iron and steel solutions. 
-    With years of experience in the industry, we offer professional fabrication, welding, and installation of metal structures — including fences, gates, railings, roofing, and more. 
-    Our team combines skilled craftsmanship with durable materials to ensure every project is built to last.`
+    title: "Tentang Kami",
+    description: `AA Expert Solution ialah syarikat pembinaan dan kerja logam yang pakar dalam penyelesaian besi dan keluli berkualiti tinggi.
+Kami ada pengalaman dalam industri ini dan menawarkan perkhidmatan profesional dalam fabrikasi, welding, dan pemasangan struktur logam, termasuk pagar, pintu, railing, bumbung dan macam-macam lagi.
+Gabungan kemahiran tukang kami dengan bahan yang tahan lasak memastikan setiap projek yang kami buat memang kukuh dan tahan lama.`
   }
