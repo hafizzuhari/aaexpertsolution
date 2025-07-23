@@ -1,5 +1,5 @@
 export const certifications = {
-  title: "Certifications & Compliance",
+  title: "Pensijilan dan Akreditasi",
   items: [
     "CIDB Registered Contractor",
     "Certified Welders & Fabricators",
