@@ -1,5 +1,5 @@
 export const coverageArea = {
-  title: "Areas We Serve",
-  description: "Our team covers Selangor, Kuala Lumpur, and nearby regions.",
+  title: "Kawasan Kami",
+  description: "Kami menyediakan servis kami ke kawasan sekitar Selangor, Kuala Lumpur sehingga ke Perak dan Negeri Sembilan.",
   locations: ["Kajang", "Cheras", "Bangi", "Shah Alam", "Putrajaya", "Serdang", "Semenyih"]
 }
