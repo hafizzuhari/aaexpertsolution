@@ -2,20 +2,20 @@ export const faq = {
     title: "Frequently Asked Questions",
     items: [
       {
-        question: "Do you offer on-site measurements?",
-        answer: "Yes, we provide free on-site measurements and consultations within Klang Valley."
+        question: "Adakah kami menyediakan on-site visit untuk pengukuran?",
+        answer: "Betul, kami menyediakan free on-site visit dan free quotation untuk semua pelanggan kami."
       },
       {
-        question: "What materials do you use?",
-        answer: "We use high-grade wrought iron, mild steel, galvanized steel, and zincalume depending on project requirements."
+        question: "Apa jenis material yang digunakan?",
+        answer: "Kami menggunakan kualiti besi yang terbaik tapi juga menyediakan harga yang berpatutan mengikut kehendak, budget dan kesesuaian mengikut keadaan."
       },
       {
-        question: "How long does fabrication take?",
-        answer: "Typical projects take between 5-14 days depending on size and complexity."
+        question: "Berapa lama tempoh hasil kerja fabrikasi siap?",
+        answer: "Tempoh untuk projek fabrikasi selalunya dalam masa 5-14 hari bergantung kepada jenis design."
       },
       {
-        question: "Can I request a custom design?",
-        answer: "Absolutely! We offer fully custom designs tailored to your taste and property style."
+        question: "Boleh saya minta custom design?",
+        answer: "Semestinya! kami boleh ikut citarasa anda sepenuhnya."
       }
     ]
   }
