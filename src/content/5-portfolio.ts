@@ -1,6 +1,6 @@
 export const portfolio = {
-    title: "Our Projects",
-    description: "We take pride in every project, whether large-scale commercial or small residential.",
+    title: "Hasil Projek Kami",
+    description: "Kami bangga dengan setiap projek, tak kira besar atau kecil, dari komersial sampai ke rumah kediaman.",
     items: [
       {
         title: "Industrial Perimeter Fencing",
