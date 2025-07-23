@@ -1,5 +1,5 @@
 export const services = {
-    title: "Our Services",
+    title: "Servis Kami",
     items: [
       {
         name: "Custom Iron Fencing",
