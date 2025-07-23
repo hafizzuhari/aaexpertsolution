@@ -1,5 +1,5 @@
 export const testimonials = {
-  title: "What Our Clients Say",
+  title: "Testimoni Kami",
   items: [
     {
       name: "Ahmad Faizal",
