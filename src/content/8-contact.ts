@@ -1,24 +1,24 @@
 export const contact = {
-  title: "Contact Us",
+  title: "Hubungi Kami",
   company: {
     name: "AA Expert Solution",
-    tagline: "Building your dreams with precision and quality",
+    tagline: "Pakar Besi Anda, Berkualiti dan Dipercayai",
     logo: "/logo.jpg",
   },
   items: [
     {
       type: "address",
-      label: "Lot 12, Jalan Industri 3, Kawasan Perindustrian, 43000 Kajang, Selangor, Malaysia",
+      label: "37, Jalan P2/9, Seksyen 2, Bandar Teknologi Kajang, Semenyih 43500 Selangor",
       icon: "map-pin",
     },
     {
       type: "phone",
-      label: "+60 12-345 6789",
+      label: "+60 11-1887 1375",
       icon: "phone",
     },
     {
       type: "email",
-      label: "info@aaexpertsolution.com",
+      label: "aaexpertsolution@gmail.com",
       icon: "mail",
     },
     {
