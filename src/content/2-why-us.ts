@@ -1,9 +1,9 @@
 export const whyUs = {
-  title: "Why Choose Us?",
+  title: "Kenapa Pilih Kami?",
   items: [
-    { icon: "shield-check", title: "Proven Durability", description: "We use only high-grade materials for lasting results." },
-    { icon: "user-plus", title: "Experienced Team", description: "Years of experience in ironworks and construction projects." },
-    { icon: "ruler", title: "Custom Solutions", description: "Tailored designs to suit your space, style, and budget." },
-    { icon: "clock", title: "Timely Delivery", description: "We complete projects on schedule without compromising quality." }
+    { icon: "shield-check", title: "Ketahanan Terjamin", description: "Kami memastikan ketahanan hasil kerja kami terjamin." },
+    { icon: "user-plus", title: "Tenaga Kerja Berpengalaman", description: "Tenaga kerja yang berpengalaman dan dedikasi." },
+    { icon: "ruler", title: "Mengikut Citarasa Pelanggan", description: "Mengikut kesesuaian citarasa dan budget anda." },
+    { icon: "clock", title: "Tepat Pada Masa", description: "Kami akan memastikan hasil kerja disiapkan dalam masa yang ditetapkan." }
   ]
 }
