@@ -9,7 +9,7 @@ export const openGraph = {
   description: "Specialists in custom metalwork: fences, gates, roofing, and welding. Serving homes and businesses across Selangor and Kuala Lumpur.",
   type: "website",
   url: "https://www.aaexpertsolution.com",
-  image: "https://www.aaexpertsolution.com/logo.jpg",
+  image: "https://www.aaexpertsolution.com/logo.webp",
   locale: "en_MY",
   site_name: "AA Expert Solution"
 }

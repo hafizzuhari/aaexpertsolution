@@ -3,7 +3,7 @@ export const contact = {
   company: {
     name: "AA Expert Solution",
     tagline: "Pakar Besi Anda, Berkualiti dan Dipercayai",
-    logo: "/logo.jpg",
+    logo: "/logo.webp",
   },
   items: [
     {
