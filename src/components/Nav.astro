@@ -1,14 +1,19 @@
-<nav class="fixed z-10 p-4 lg:p-8 w-full bg-transparent">
+<nav class="fixed z-10 p-4 lg:p-8 w-full bg-transparent" x-data="{ isOpen: false }">
     <div class="w-full flex justify-between">
         <a href="/" class="btn btn-xl btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></a>
-        <!-- <ul class="flex gap-0">
-            <li><a href="#" class="btn">About Us</a></li>
-            <li><a href="#" class="btn">Services</a></li>
-            <li><a href="#" class="btn">Portfolio</a></li>
-            <li><a href="#" class="btn">Catalog</a></li>
-            <li><a href="#" class="btn">Contact Us</a></li>
-            <li><a href="" class="btn btn-primary">Get a Quote!</a></li>
-        </ul> -->
-        <btn href="/" class="btn btn-xl btn-square shadow-xl btn-primary"><i class="ti ti-menu-2"></i></btn>
+        <ul class="lg:flex flex-col lg:flex-row gap-0 absolute lg:relative z-10 top-0 left-0 w-screen h-screen lg:h-fit lg:w-fit bg-base-200" :class="isOpen ? 'flex' : 'hidden'">
+            <li class="flex justify-between p-4 lg:hidden">
+                <a href="/" class="btn btn-xl btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></a>
+                <button class="btn btn-xl btn-square shadow-xl btn-primary" @click="isOpen = false"><i class="ti ti-x"></i></button>
+            </li>
+            <li><a href="#about" class="btn btn-xl text-base w-full" @click="isOpen = false">Tentang</a></li>
+            <li><a href="#services" class="btn btn-xl text-base w-full" @click="isOpen = false">Servis</a></li>
+            <li><a href="#portfolio" class="btn btn-xl text-base w-full" @click="isOpen = false">Portfolio</a></li>
+            <li><a href="#testimonials" class="btn btn-xl text-base w-full" @click="isOpen = false">Testimoni</a></li>
+            <li><a href="#contact" class="btn btn-xl text-base w-full" @click="isOpen = false">Hubungi Kami</a></li>
+            <li class="flex-grow-1 lg:hidden"></li>
+            <li><a href="#contact" class="btn btn-xl text-base w-full btn-primary" @click="isOpen = false">Kuotasi</a></li>
+        </ul>
+        <button class="lg:hidden btn btn-xl btn-square shadow-xl btn-primary" @click="isOpen = true"><i class="ti ti-menu-2"></i></button>
     </div>
 </nav>
