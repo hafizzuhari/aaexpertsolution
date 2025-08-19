@@ -2,6 +2,7 @@
 import Layout from "../layouts/Layout.astro";
 import { carousel } from "../content/1-carousel";
 import { whyUs } from "../content/2-why-us"
+import { certifications } from "../content/2.1-certifications";
 import { about } from "../content/3-about";
 import { services } from "../content/4-services";
 import { portfolio } from "../content/5-portfolio";
@@ -11,7 +12,7 @@ import { contact } from "../content/8-contact"
 ---
 
 <Layout>
-    <section class="h-screen">
+    <section class="h-screen" id="home">
         <div class="carousel h-full w-full">
             {
                 carousel.map((c, index) => {
@@ -19,7 +20,7 @@ import { contact } from "../content/8-contact"
                         <div id={`slide-${index}`}
                             class={`carousel-item h-full w-full bg-[url(${c.backgroundUrl})] bg-cover bg-center relative`}
                         >
-                            <div class="h-full w-full bg-secondary/50 flex flex-col justify-center items-center p-4">
+                            <div class="h-full w-full bg-secondary/50 flex flex-col justify-center items-center p-8">
                                 <h2 class="text-5xl text-center font-bold text-primary mb-4">{c.title}</h2>
                                 <p class="text-lg text-center text-white">{c.subtitle}</p>
                             </div>
@@ -33,26 +34,46 @@ import { contact } from "../content/8-contact"
             }
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-secondary">
+    <section class="p-4 py-12 lg:p-16 bg-secondary" id="why-us">
         <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16">{whyUs.title}</h3>
         <div class="grid grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-4 lg:gap-8">
             {
                 whyUs.items.map(item => {
-                    return <div class="p-4 lg:p-8 bg-base-200 shadow-xl">
+                    return <div class="p-4 lg:p-8 bg-base-200 shadow-xl grid grid-rows-3">
                         <i class={`ti ti-${item.icon} text-5xl text-primary`}></i>
-                        <h4 class="font-bold mt-4 lg:mt-8">{item.title}</h4>
+                        <h4 class="font-bold">{item.title}</h4>
                         <p>{item.description}</p>
                     </div>
                 })
             }
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-base-200">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16">{about.title}</h3>
+    <section class="p-4 py-12 lg:p-16 bg-primary" id="certifications">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+            <div class="col-span-1">
+                <h3 class="text-xl font-bold text-secondary text-center mb-4 lg:mb-8">{certifications.title}</h3>
+                <p class="text-secondary text-justify">{certifications.description}</p>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-3 w-full col-span-2 gap-4">
+                {
+                    certifications.items.map(item => {
+                        return <div class="text-center p-4 flex flex-col bg-secondary">
+                            <div class="p-4 bg-base-200">
+                                <i class={`ti ti-${item.icon} text-9xl text-secondary`}></i>
+                            </div>
+                            <div class="mt-4 flex-grow text-primary">{item.text}</div>
+                        </div>
+                    })
+                }
+            </div>
+        </div>
+    </section>
+    <section class="p-4 py-12 lg:p-16 bg-base-200" id="about">
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-8">{about.title}</h3>
         <p class="text-secondary text-justify">{about.description}</p>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-primary">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg-mb-16 text-secondary">{services.title}</h3>
+    <section class="p-4 py-12 lg:p-16 bg-primary" id="services">
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16 text-secondary">{services.title}</h3>
         <div class="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8">
             {services.items.map(item => {
                 return <div class="bg-secondary grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
@@ -65,7 +86,7 @@ import { contact } from "../content/8-contact"
             })}
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-base-200">
+    <section class="p-4 py-12 lg:p-16 bg-base-200" id="portfolio">
         <h3 class="text-xl font-bold text-primary text-center text-secondary mb-4 lg:mb-8">{portfolio.title}</h3>
         <p class="text-secondary text-center mb-12 lg:mb-16">{portfolio.description}</p>
         <div class="grid grid-cols-1 lg:grid-rows-1 lg:grid-cols-4 gap-4">
@@ -87,7 +108,7 @@ import { contact } from "../content/8-contact"
             })}
         </div>
     </section>
-    <section class="bg-[url(/faq.webp)] bg-cover bg-center">
+    <section class="bg-[url(/faq.webp)] bg-cover bg-center" id="faqs">
         <div class="bg-secondary/50 p-4 py-12 lg:p-16">
             <h3 class="text-xl font-bold text-primary text-center text-primary mb-12 lg:mb-16">{faq.title}</h3>
             {faq.items.map(item => {
@@ -99,7 +120,7 @@ import { contact } from "../content/8-contact"
             })}
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-secondary">
+    <section class="p-4 py-12 lg:p-16 bg-secondary" id="testimonials">
         <h3 class="text-xl font-bold text-primary text-center text-primary mb-12 lg:mb-16">{testimonials.title}</h3>
         <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 gap-4 lg:gap-8">
             {testimonials.items.map(item => {

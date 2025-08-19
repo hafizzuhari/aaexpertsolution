@@ -1,20 +1,50 @@
 ---
 import { contact } from "../content/8-contact"
+import { quote } from "../content/9-quote";
 
 const { company } = contact;
 ---
-<div class="bg-[url(/faq.webp)] bg-cover bg-center">
-    <div class="p-12 bg-[#2a2a2a]/75 flex flex-col lg:p-16">
-        <div class={`btn btn-square bg-[url(${company.logo})] bg-cover bg-center mb-4 lg:mb-8`}></div>
-        <div class="text-primary font-bold">{company.name}</div>
-        <div class="text-base-200 text-xs mb-4 lg:mb-8">{company.tagline}</div>
-        <div class="flex flex-col gap-2">
-            {contact.items.map(item => {
-                return <div class="flex gap-2 lg:gap-4 items-center">
-                    <i class={`ti ti-${item.icon} text-xl text-primary`}></i>
-                    <span class="text-base-200 text-xs">{item.label}</span>
-                </div>
-            })}
+<div class="bg-[url(/faq.webp)] bg-cover bg-center" id="contact">
+    <div class="p-12 bg-[#2a2a2a]/75 lg:p-16 flex flex-col-reverse lg:flex-row justify-between gap-12 lg:gap-16">
+        <div class="flex flex-col justify-start">
+            <div class={`btn btn-square bg-[url(${company.logo})] bg-cover bg-center mb-4 lg:mb-8`}></div>
+            <div class="text-primary font-bold">{company.name}</div>
+            <div class="text-base-200 text-xs mb-4 lg:mb-8">{company.tagline}</div>
+            <div class="flex flex-col gap-2">
+                {contact.items.map(item => {
+                    return <div class="flex gap-2 lg:gap-4 items-center">
+                        <i class={`ti ti-${item.icon} text-xl text-primary`}></i>
+                        <span class="text-base-200 text-xs">{item.label}</span>
+                    </div>
+                })}
+            </div>
+        </div>
+        <div>
+            <h4 class="text-primary text-xl font-bold lg:text-start text-center">{quote.title}</h4>
+            <p class="text-base-200 mb-8 lg:text-start text-center">{quote.description}</p>
+            <form onsubmit="event.preventDefault()" class="grid lg:grid-cols-3 lg:gap-2">
+                {
+                    quote.formFields.map(item => {
+                        return <fieldset class={`fieldset ${item.type === "textarea" && "lg:col-span-3"} ${item.type === "select" && "lg:col-span-2"}`}>
+                            <legend class="fieldset-legend text-base-200">{item.label}</legend>
+                            {(() => {
+                                if (item.type == "select") {
+                                    return <select class="select w-full">
+                                        {item.options?.map(o => {
+                                            return <option value={o}>{o}</option>
+                                        })}
+                                    </select>
+                                }
+                                if (item.type === "textarea") {
+                                    return <textarea class="textarea w-full"></textarea>
+                                }
+                                return <input type={item.type as any} class="input w-full">
+                            })()}
+                        </fieldset>
+                    })
+                }
+                <button class="btn btn-primary mt-4 col-span-full">{quote.submitButtonText}</button>
+            </form>
         </div>
     </div>
 </div>
