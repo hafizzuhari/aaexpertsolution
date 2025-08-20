@@ -3,12 +3,12 @@ import Layout from "../layouts/Layout.astro";
 import { carousel } from "../content/1-carousel";
 import { whyUs } from "../content/2-why-us"
 import { certifications } from "../content/2.1-certifications";
+import { coverageArea } from "../content/2.2-coverage";
 import { about } from "../content/3-about";
 import { services } from "../content/4-services";
 import { portfolio } from "../content/5-portfolio";
 import { faq } from "../content/6-faq";
 import { testimonials } from "../content/7-testimonials";
-import { contact } from "../content/8-contact"
 ---
 
 <Layout>
@@ -65,6 +65,49 @@ import { contact } from "../content/8-contact"
                         </div>
                     })
                 }
+            </div>
+        </div>
+    </section>
+    <section class="bg-[url(/faq.webp)] bg-cover bg-center" id="faqs"
+        x-data="{ map: null, selectedLocationIndex: 0 }"
+        x-init={`
+            const locations = ${JSON.stringify(coverageArea.locations)};
+            this.map = L.map('map').setView([locations[0].coordinates.lat, locations[0].coordinates.lng], 13);
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 20 }).addTo(this.map);
+            locations.forEach((location) => {
+                const marker = L
+                    .marker([location.coordinates.lat, location.coordinates.lng])
+                    .addTo(this.map)
+                    .bindPopup(location.name+", "+location.state);
+                marker.on('click', function () {
+                    this.map.setView(marker.getLatLng(), this.map.getZoom(), {
+                    animate: true
+                    });
+                });
+            })
+        `}
+    >
+        <div class="bg-secondary/50 p-4 py-12 lg:p-16">
+            <h3 class="text-xl font-bold text-primary text-center mb-4 lg:mb-8">{coverageArea.title}</h3>
+            <p class="text-base-200 text-center mb-12 lg:mb-16">{coverageArea.description}</p>
+            <div class="grid grid-cols-3">
+                <div class="lg:col-span-1 col-span-3 flex flex-col">
+                    {
+                        coverageArea.locations.map((item, i) => {
+                            return <button
+                                class="btn p-8 bg-base-200"
+                                @click={`
+                                    this.map.setView([${item.coordinates.lat}, ${item.coordinates.lng}], 20);
+                                    this.selectedLocationIndex = ${i}
+                                `}>
+                                {`${item.name}, ${item.state}`}
+                            </button>
+                        })
+                    }
+                </div>
+                <div class="col-span-2">
+                    <div id="map" class="h-full w-full"></div>
+                </div>
             </div>
         </div>
     </section>
