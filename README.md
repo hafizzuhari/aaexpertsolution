@@ -1,52 +1,53 @@
-# Astro Starter Kit: Basics
+# AA Expert Solution — Marketing Site
 
-```sh
-npm create astro@latest -- --template basics
-```
+Single-page marketing site for AA Expert Solution, an ironworks, roofing & metal
+fabrication company serving Selangor & Kuala Lumpur. Built with
+[Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.com), and
+[daisyui](https://daisyui.com). Deployed to GitHub Pages at
+[aaexpertsolution.com](https://www.aaexpertsolution.com).
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
-
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
-
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
-
-## 🚀 Project Structure
-
-Inside of your Astro project, you'll see the following folders and files:
+## Project structure
 
 ```text
 /
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+├── public/               # static assets (images, favicon, CNAME, robots.txt)
+├── scripts/
+│   └── compress.js       # resizes + re-encodes public/ images to webp
+├── src/
+│   ├── components/       # Nav, Footer
+│   ├── content/          # page copy, one file per section (numbered by order)
+│   ├── layouts/          # Layout.astro — head, theme tokens, global styles
+│   ├── pages/
+│   │   └── index.astro   # the whole homepage, section by section
+│   └── styles/
+│       └── global.css    # Tailwind + daisyui entry point
+└── astro.config.mjs
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+Section copy (headlines, service descriptions, FAQ, testimonials, etc.) lives
+in `src/content/*.ts`, separate from markup — edit copy there without touching
+`index.astro`.
 
-## 🧞 Commands
+## Commands
 
-All commands are run from the root of the project, from a terminal:
+All commands run from the project root:
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| Command                    | Action                                       |
+| :-------------------------- | :-------------------------------------------- |
+| `npm install`                | Install dependencies                          |
+| `npm run dev`                 | Start local dev server at `localhost:4321`    |
+| `npm run build`               | Build production site to `./dist/`            |
+| `npm run preview`              | Preview the production build locally          |
+| `npm run compress:image`       | Resize + re-encode images in `public/` to webp |
 
-## 👀 Want to learn more?
+## Deployment
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Pushing to `main` triggers `.github/workflows/deploy.yml`, which builds the
+site and deploys it to GitHub Pages automatically. The custom domain is
+configured via `public/CNAME`.
+
+## Quote form
+
+The "Request a Free Quote" form submits via [Web3Forms](https://web3forms.com).
+The access key lives in `src/content/9-quote.ts` (`web3formsAccessKey`) — get
+one free at web3forms.com if it ever needs to be rotated.

@@ -9,24 +9,29 @@ import { services } from "../content/4-services";
 import { portfolio } from "../content/5-portfolio";
 import { faq } from "../content/6-faq";
 import { testimonials } from "../content/7-testimonials";
+
+const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
 ---
 
 <Layout>
     <section class="h-screen" id="home">
         <div class="carousel h-full w-full">
             {
-                carousel.map((c, index) => {
+                carousel.backgroundUrls.map((bg, index) => {
+                    const ms = carousel.ms[index];
+                    const en = carousel.en[index];
                     return (
                         <div id={`slide-${index}`}
-                            class={`carousel-item h-full w-full bg-[url(${c.backgroundUrl})] bg-cover bg-center relative`}
+                            class="carousel-item h-full w-full bg-cover bg-center relative"
+                            style={`background-image: url(${bg})`}
                         >
                             <div class="h-full w-full bg-secondary/50 flex flex-col justify-center items-center p-8">
-                                <h2 class="text-5xl text-center font-bold text-primary mb-4">{c.title}</h2>
-                                <p class="text-lg text-center text-white">{c.subtitle}</p>
+                                <h2 class="text-5xl text-center font-bold text-primary mb-4" data-ms={ms.title} data-en={en.title} x-text={t}>{ms.title}</h2>
+                                <p class="text-lg text-center text-white" data-ms={ms.subtitle} data-en={en.subtitle} x-text={t}>{ms.subtitle}</p>
                             </div>
                             <div class="hidden absolute left-8 right-8 top-1/2 lg:flex -translate-y-1/2 transform justify-between">
-                                <a href={`#slide-${index - 1 < 0 ? carousel.length - 1 : index - 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-left text-secondary"></i></a>
-                                <a href={`#slide-${index + 1 >= carousel.length ? 0 : index + 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-right text-secondary"></i></a>
+                                <a href={`#slide-${index - 1 < 0 ? carousel.backgroundUrls.length - 1 : index - 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-left text-secondary"></i></a>
+                                <a href={`#slide-${index + 1 >= carousel.backgroundUrls.length ? 0 : index + 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-right text-secondary"></i></a>
                             </div>
                         </div>
                     );
@@ -35,14 +40,16 @@ import { testimonials } from "../content/7-testimonials";
         </div>
     </section>
     <section class="p-4 py-12 lg:p-16 bg-secondary" id="why-us">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16">{whyUs.title}</h3>
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16" data-ms={whyUs.ms.title} data-en={whyUs.en.title} x-text={t}>{whyUs.ms.title}</h3>
         <div class="grid grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-4 lg:gap-8">
             {
-                whyUs.items.map(item => {
+                whyUs.icons.map((icon, i) => {
+                    const msItem = whyUs.ms.items[i];
+                    const enItem = whyUs.en.items[i];
                     return <div class="p-4 lg:p-8 bg-base-200 shadow-xl grid grid-rows-3">
-                        <i class={`ti ti-${item.icon} text-5xl text-primary`}></i>
-                        <h4 class="font-bold">{item.title}</h4>
-                        <p>{item.description}</p>
+                        <i class={`ti ti-${icon} text-5xl text-primary`}></i>
+                        <h4 class="font-bold" data-ms={msItem.title} data-en={enItem.title} x-text={t}>{msItem.title}</h4>
+                        <p data-ms={msItem.description} data-en={enItem.description} x-text={t}>{msItem.description}</p>
                     </div>
                 })
             }
@@ -51,17 +58,19 @@ import { testimonials } from "../content/7-testimonials";
     <section class="p-4 py-12 lg:p-16 bg-primary" id="certifications">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
             <div class="col-span-1">
-                <h3 class="text-xl font-bold text-secondary text-center mb-4 lg:mb-8">{certifications.title}</h3>
-                <p class="text-secondary text-justify">{certifications.description}</p>
+                <h3 class="text-xl font-bold text-secondary text-center mb-4 lg:mb-8" data-ms={certifications.ms.title} data-en={certifications.en.title} x-text={t}>{certifications.ms.title}</h3>
+                <p class="text-secondary text-justify" data-ms={certifications.ms.description} data-en={certifications.en.description} x-text={t}>{certifications.ms.description}</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 w-full col-span-2 gap-4">
+            <div class="grid grid-cols-1 w-full col-span-2 gap-4">
                 {
-                    certifications.items.map(item => {
-                        return <div class="text-center p-4 flex flex-col bg-secondary">
-                            <div class="p-4 bg-base-200">
-                                <i class={`ti ti-${item.icon} text-9xl text-secondary`}></i>
+                    certifications.icons.map((icon, i) => {
+                        const msItem = certifications.ms.items[i];
+                        const enItem = certifications.en.items[i];
+                        return <div class="flex items-center gap-4 bg-secondary p-4">
+                            <div class="p-3 bg-base-200 shrink-0">
+                                <i class={`ti ti-${icon} text-4xl text-secondary`}></i>
                             </div>
-                            <div class="mt-4 flex-grow text-primary">{item.text}</div>
+                            <div class="text-primary font-bold" data-ms={msItem.text} data-en={enItem.text} x-text={t}>{msItem.text}</div>
                         </div>
                     })
                 }
@@ -88,8 +97,8 @@ import { testimonials } from "../content/7-testimonials";
         `}
     >
         <div class="bg-secondary/50 p-4 py-12 lg:p-16">
-            <h3 class="text-xl font-bold text-primary text-center mb-4 lg:mb-8">{coverageArea.title}</h3>
-            <p class="text-base-200 text-center mb-12 lg:mb-16">{coverageArea.description}</p>
+            <h3 class="text-xl font-bold text-primary text-center mb-4 lg:mb-8" data-ms={coverageArea.ms.title} data-en={coverageArea.en.title} x-text={t}>{coverageArea.ms.title}</h3>
+            <p class="text-base-200 text-center mb-12 lg:mb-16" data-ms={coverageArea.ms.description} data-en={coverageArea.en.description} x-text={t}>{coverageArea.ms.description}</p>
             <div class="grid grid-cols-3">
                 <div class="lg:col-span-1 col-span-3 flex flex-col">
                     {
@@ -112,38 +121,46 @@ import { testimonials } from "../content/7-testimonials";
         </div>
     </section>
     <section class="p-4 py-12 lg:p-16 bg-base-200" id="about">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-8">{about.title}</h3>
-        <p class="text-secondary text-justify">{about.description}</p>
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-8" data-ms={about.ms.title} data-en={about.en.title} x-text={t}>{about.ms.title}</h3>
+        <p class="text-secondary text-justify" style="white-space: pre-line" data-ms={about.ms.description} data-en={about.en.description} x-text={t}>{about.ms.description}</p>
     </section>
     <section class="p-4 py-12 lg:p-16 bg-primary" id="services">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16 text-secondary">{services.title}</h3>
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16 text-secondary" data-ms={services.ms.title} data-en={services.en.title} x-text={t}>{services.ms.title}</h3>
         <div class="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8">
-            {services.items.map(item => {
+            {services.images.map((image, i) => {
+                const msItem = services.ms.items[i];
+                const enItem = services.en.items[i];
                 return <div class="bg-secondary grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
-                    <div class={`row-span-2 bg-[url(${item.image})] bg-cover bg-center lg:h-32`}></div>
+                    <div class="row-span-2 relative overflow-hidden lg:h-32">
+                        <img src={image} alt={msItem.name} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+                    </div>
                     <div class="p-4 lg:p-8 items-start justify-start flex flex-col h-full">
-                        <h4 class="text-primary font-bold">{item.name}</h4>
-                        <p class="text-base-200">{item.description}</p>
+                        <h4 class="text-primary font-bold" data-ms={msItem.name} data-en={enItem.name} x-text={t}>{msItem.name}</h4>
+                        <p class="text-base-200" data-ms={msItem.description} data-en={enItem.description} x-text={t}>{msItem.description}</p>
                     </div>
                 </div>
             })}
         </div>
     </section>
     <section class="p-4 py-12 lg:p-16 bg-base-200" id="portfolio">
-        <h3 class="text-xl font-bold text-primary text-center text-secondary mb-4 lg:mb-8">{portfolio.title}</h3>
-        <p class="text-secondary text-center mb-12 lg:mb-16">{portfolio.description}</p>
-        <div class="grid grid-cols-1 lg:grid-rows-1 lg:grid-cols-4 gap-4">
-            {portfolio.items.map(item => {
+        <h3 class="text-xl font-bold text-primary text-center text-secondary mb-4 lg:mb-8" data-ms={portfolio.ms.title} data-en={portfolio.en.title} x-text={t}>{portfolio.ms.title}</h3>
+        <p class="text-secondary text-center mb-12 lg:mb-16" data-ms={portfolio.ms.description} data-en={portfolio.en.description} x-text={t}>{portfolio.ms.description}</p>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            {portfolio.items.map((item, i) => {
+                const msItem = portfolio.ms.items[i];
+                const enItem = portfolio.en.items[i];
                 return <div class="bg-primary grid grid-cols-1">
-                    <div class={`bg-[url(${item.imageUrl})] aspect-[21/9] bg-cover bg-center`}></div>
-                    <div class="p-4">
-                        <h4 class="font-bold">{item.title}</h4>
+                    <div class="relative overflow-hidden aspect-[21/9]">
+                        <img src={item.imageUrl} alt={msItem.title} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+                    </div>
+                    <div class="p-4 lg:p-6">
+                        <h4 class="font-bold text-lg" data-ms={msItem.title} data-en={enItem.title} x-text={t}>{msItem.title}</h4>
                         <div class="flex gap-2 items-center">
                             <i class="ti ti-map-pin"></i><span>{item.location}</span>
                         </div>
                         <div class="flex gap-2 mt-4 justify-start">
-                            {item.tags.map(tag => {
-                                return <span class="p-2 bg-secondary text-base-200 text-xs">{tag}</span>
+                            {msItem.tags.map((tag, j) => {
+                                return <span class="p-2 bg-secondary text-base-200 text-xs" data-ms={tag} data-en={enItem.tags[j]} x-text={t}>{tag}</span>
                             })}
                         </div>
                     </div>
@@ -153,23 +170,26 @@ import { testimonials } from "../content/7-testimonials";
     </section>
     <section class="bg-[url(/faq.webp)] bg-cover bg-center" id="faqs">
         <div class="bg-secondary/50 p-4 py-12 lg:p-16">
-            <h3 class="text-xl font-bold text-primary text-center text-primary mb-12 lg:mb-16">{faq.title}</h3>
-            {faq.items.map(item => {
+            <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16" data-ms={faq.ms.title} data-en={faq.en.title} x-text={t}>{faq.ms.title}</h3>
+            {faq.ms.items.map((msItem, index) => {
+                const enItem = faq.en.items[index];
                 return <div class="collapse bg-base-100 border border-base-300">
-                    <input type="radio" name="my-accordion-1" checked="checked" />
-                    <div class="collapse-title font-semibold">{item.question}</div>
-                    <div class="collapse-content text-sm">{item.answer}</div>
+                    <input type="radio" name="my-accordion-1" checked={index === 0} />
+                    <div class="collapse-title font-semibold" data-ms={msItem.question} data-en={enItem.question} x-text={t}>{msItem.question}</div>
+                    <div class="collapse-content text-sm" data-ms={msItem.answer} data-en={enItem.answer} x-text={t}>{msItem.answer}</div>
                 </div>
             })}
         </div>
     </section>
     <section class="p-4 py-12 lg:p-16 bg-secondary" id="testimonials">
-        <h3 class="text-xl font-bold text-primary text-center text-primary mb-12 lg:mb-16">{testimonials.title}</h3>
+        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16" data-ms={testimonials.ms.title} data-en={testimonials.en.title} x-text={t}>{testimonials.ms.title}</h3>
         <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 gap-4 lg:gap-8">
             {testimonials.items.map(item => {
                 return <div class="bg-base-200">
                     <div class="flex">
-                        <div class={`aspect-square bg-[url(${item.image})] bg-cover bg-center p-8`}></div>
+                        <div class="aspect-square relative overflow-hidden p-8">
+                            <img src={item.image} alt={item.name} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+                        </div>
                         <div class="bg-primary flex-grow-1 p-4">
                             <span>{item.name}</span>
                             <div class="text-xs">
@@ -178,7 +198,16 @@ import { testimonials } from "../content/7-testimonials";
                             </div>
                         </div>
                     </div>
-                    <div class="p-4">"{item.quote}""</div>
+                    <div class="p-4">
+                        <div class="flex gap-1 text-primary mb-2" aria-label="5 out of 5 stars">
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                        </div>
+                        <p>"{item.quote}"</p>
+                    </div>
                 </div>
             })}
         </div>

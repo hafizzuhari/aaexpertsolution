@@ -1,5 +1,8 @@
 export const testimonials = {
-  title: "Testimoni Kami",
+  ms: { title: "Testimoni Kami" },
+  en: { title: "Customer Testimonials" },
+  // Quotes are kept in customers' original words in both languages -
+  // translating a real review would misrepresent what they actually said.
   items: [
     {
       name: "Ahmad Faizal",

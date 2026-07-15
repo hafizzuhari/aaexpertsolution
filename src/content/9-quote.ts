@@ -1,44 +1,29 @@
 export const quote = {
-  title: "Request a Free Quote",
-  description: "Tell us about your project and we'll get back to you with a free estimate.",
-  formFields: [
-    {
-      label: "Full Name",
-      name: "fullName",
-      type: "text",
-      required: true
-    },
-    {
-      label: "Email Address",
-      name: "email",
-      type: "email",
-      required: true
-    },
-    {
-      label: "Phone Number",
-      name: "phone",
-      type: "tel",
-      required: true
-    },
-    {
-      label: "Project Type",
-      name: "projectType",
-      type: "select",
-      options: ["Fencing", "Roofing", "Gates", "Fabrication", "Other"],
-      required: true
-    },
-    {
-      label: "Project Location",
-      name: "location",
-      type: "text",
-      required: false
-    },
-    {
-      label: "Additional Details",
-      name: "message",
-      type: "textarea",
-      required: false
-    }
-  ],
-  submitButtonText: "Dapatkan Kuotasi"
+  web3formsAccessKey: "d9601b0a-2df0-480e-ba7e-48199be3de6d",
+  ms: {
+    title: "Dapatkan Kuotasi Percuma",
+    description: "Ceritakan pasal projek anda dan kami akan hubungi anda dengan anggaran percuma.",
+    submitButtonText: "Dapatkan Kuotasi",
+    formFields: [
+      { label: "Nama Penuh", name: "fullName", type: "text", required: true },
+      { label: "Alamat Emel", name: "email", type: "email", required: true },
+      { label: "Nombor Telefon", name: "phone", type: "tel", required: true },
+      { label: "Jenis Projek", name: "projectType", type: "select", options: ["Pagar", "Bumbung", "Pintu Pagar", "Fabrikasi", "Lain-lain"], required: true },
+      { label: "Lokasi Projek", name: "location", type: "text", required: false },
+      { label: "Butiran Tambahan", name: "message", type: "textarea", required: false },
+    ],
+  },
+  en: {
+    title: "Request a Free Quote",
+    description: "Tell us about your project and we'll get back to you with a free estimate.",
+    submitButtonText: "Get My Quote",
+    formFields: [
+      { label: "Full Name", name: "fullName", type: "text", required: true },
+      { label: "Email Address", name: "email", type: "email", required: true },
+      { label: "Phone Number", name: "phone", type: "tel", required: true },
+      { label: "Project Type", name: "projectType", type: "select", options: ["Fencing", "Roofing", "Gates", "Fabrication", "Other"], required: true },
+      { label: "Project Location", name: "location", type: "text", required: false },
+      { label: "Additional Details", name: "message", type: "textarea", required: false },
+    ],
+  },
 }
