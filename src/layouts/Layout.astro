@@ -5,8 +5,20 @@ import { openGraph, seo } from "../content/0-seo"
 import "../styles/global.css"
 ---
 <!doctype html>
-<html lang="en" data-theme="aa-expert-solution">
+<html lang="ms" data-theme="aa-expert-solution" x-data x-bind:lang="$store.locale.value === 'ms' ? 'ms' : 'en'">
 	<head>
+		<script>
+			document.addEventListener("alpine:init", () => {
+				// @ts-ignore
+				Alpine.store("locale", {
+					value: localStorage.getItem("aaes-locale") || "ms",
+					toggle() {
+						this.value = this.value === "ms" ? "en" : "ms";
+						localStorage.setItem("aaes-locale", this.value);
+					},
+				});
+			});
+		</script>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/jpg" href="/favicon.webp" />

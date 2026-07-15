@@ -3,13 +3,14 @@ import { contact } from "../content/8-contact"
 import { quote } from "../content/9-quote";
 
 const { company } = contact;
+const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
 ---
 <div class="bg-secondary" id="contact">
     <div class="p-12 lg:p-16 flex flex-col-reverse lg:flex-row justify-between gap-12 lg:gap-16">
         <div class="flex flex-col justify-start">
             <div class={`btn btn-square bg-[url(${company.logo})] bg-cover bg-center mb-4 lg:mb-8`}></div>
             <div class="text-primary font-bold">{company.name}</div>
-            <div class="text-base-200 text-xs mb-4 lg:mb-8">{company.tagline}</div>
+            <div class="text-base-200 text-xs mb-4 lg:mb-8" data-ms={contact.ms.tagline} data-en={contact.en.tagline} x-text={t}>{contact.ms.tagline}</div>
             <div class="flex flex-col gap-2">
                 {contact.items.map(item => {
                     return <div class="flex gap-2 lg:gap-4 items-center">
@@ -17,11 +18,15 @@ const { company } = contact;
                         <span class="text-base-200 text-xs">{item.label}</span>
                     </div>
                 })}
+                <div class="flex gap-2 lg:gap-4 items-center">
+                    <i class="ti ti-clock text-xl text-primary"></i>
+                    <span class="text-base-200 text-xs" data-ms={contact.ms.hours} data-en={contact.en.hours} x-text={t}>{contact.ms.hours}</span>
+                </div>
             </div>
         </div>
         <div>
-            <h4 class="text-primary text-xl font-bold lg:text-start text-center">{quote.title}</h4>
-            <p class="text-base-200 mb-8 lg:text-start text-center">{quote.description}</p>
+            <h4 class="text-primary text-xl font-bold lg:text-start text-center" data-ms={quote.ms.title} data-en={quote.en.title} x-text={t}>{quote.ms.title}</h4>
+            <p class="text-base-200 mb-8 lg:text-start text-center" data-ms={quote.ms.description} data-en={quote.en.description} x-text={t}>{quote.ms.description}</p>
             <form
                 class="grid lg:grid-cols-3 lg:gap-2"
                 x-data="{ submitting: false, sent: false, failed: false }"
@@ -46,14 +51,18 @@ const { company } = contact;
                 <input type="hidden" name="subject" value="New Quote Request - AA Expert Solution" />
                 <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
                 {
-                    quote.formFields.map(item => {
+                    quote.ms.formFields.map((item, index) => {
+                        const enItem = quote.en.formFields[index];
                         return <fieldset class={`fieldset ${item.type === "textarea" && "lg:col-span-3"} ${item.type === "select" && "lg:col-span-2"}`}>
-                            <legend class="fieldset-legend text-base-200">{item.label}{item.required && " *"}</legend>
+                            <legend class="fieldset-legend text-base-200">
+                                <span data-ms={item.label} data-en={enItem.label} x-text={t}>{item.label}</span>
+                                {item.required && " *"}
+                            </legend>
                             {(() => {
                                 if (item.type == "select") {
                                     return <select name={item.name} required={item.required} class="select w-full">
-                                        {item.options?.map(o => {
-                                            return <option value={o}>{o}</option>
+                                        {item.options?.map((o, oi) => {
+                                            return <option value={o} data-ms={o} data-en={enItem.options?.[oi]} x-text={t}>{o}</option>
                                         })}
                                     </select>
                                 }
@@ -66,11 +75,11 @@ const { company } = contact;
                     })
                 }
                 <button type="submit" class="btn btn-primary mt-4 col-span-full" x-bind:disabled="submitting">
-                    <span x-show="!submitting">{quote.submitButtonText}</span>
-                    <span x-show="submitting" x-cloak>Menghantar...</span>
+                    <span x-show="!submitting" data-ms={quote.ms.submitButtonText} data-en={quote.en.submitButtonText} x-text={t}>{quote.ms.submitButtonText}</span>
+                    <span x-show="submitting" x-cloak data-ms="Menghantar..." data-en="Sending..." x-text={t}>Menghantar...</span>
                 </button>
-                <p x-show="sent" x-cloak class="text-success col-span-full mt-2 text-sm">Berjaya dihantar! Kami akan hubungi anda tidak lama lagi.</p>
-                <p x-show="failed" x-cloak class="text-error col-span-full mt-2 text-sm">Something went wrong — please try again or call us directly at +60 11-1887 1375.</p>
+                <p x-show="sent" x-cloak class="text-success col-span-full mt-2 text-sm" data-ms="Berjaya dihantar! Kami akan hubungi anda tidak lama lagi." data-en="Sent successfully! We'll be in touch shortly." x-text={t}>Berjaya dihantar! Kami akan hubungi anda tidak lama lagi.</p>
+                <p x-show="failed" x-cloak class="text-error col-span-full mt-2 text-sm" data-ms="Something went wrong — sila cuba lagi atau hubungi kami terus di +60 11-1887 1375." data-en="Something went wrong — please try again or call us directly at +60 11-1887 1375." x-text={t}>Something went wrong — please try again or call us directly at +60 11-1887 1375.</p>
             </form>
         </div>
     </div>

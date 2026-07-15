@@ -1,8 +1,16 @@
 export const contact = {
-  title: "Hubungi Kami",
+  ms: {
+    title: "Hubungi Kami",
+    tagline: "Pakar Besi Anda, Berkualiti dan Dipercayai",
+    hours: "Isnin-Sabtu: 9:00 PG - 6:00 PTG",
+  },
+  en: {
+    title: "Contact Us",
+    tagline: "Your Trusted, Quality Ironworks Expert",
+    hours: "Mon-Sat: 9:00 AM - 6:00 PM",
+  },
   company: {
     name: "AA Expert Solution",
-    tagline: "Pakar Besi Anda, Berkualiti dan Dipercayai",
     logo: "/logo.webp",
   },
   items: [
@@ -21,10 +29,5 @@ export const contact = {
       label: "aaexpertsolution@gmail.com",
       icon: "mail",
     },
-    {
-      type: "hours",
-      label: "Mon-Sat: 9:00 AM - 6:00 PM",
-      icon: "clock",
-    }
-  ]
+  ],
 }

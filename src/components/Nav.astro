@@ -1,3 +1,6 @@
+---
+const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
+---
 <nav class="fixed z-10 p-4 lg:p-8 w-full bg-transparent" x-data="{ isOpen: false }">
     <div class="w-full flex justify-between">
         <a href="/" class="btn btn-xl btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></a>
@@ -6,13 +9,21 @@
                 <a href="/" class="btn btn-xl btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></a>
                 <button class="btn btn-xl btn-square shadow-xl btn-primary" @click="isOpen = false"><i class="ti ti-x"></i></button>
             </li>
-            <li><a href="#about" class="btn btn-xl text-base w-full" @click="isOpen = false">Tentang</a></li>
-            <li><a href="#services" class="btn btn-xl text-base w-full" @click="isOpen = false">Servis</a></li>
-            <li><a href="#portfolio" class="btn btn-xl text-base w-full" @click="isOpen = false">Portfolio</a></li>
-            <li><a href="#testimonials" class="btn btn-xl text-base w-full" @click="isOpen = false">Testimoni</a></li>
-            <li><a href="#contact" class="btn btn-xl text-base w-full" @click="isOpen = false">Hubungi Kami</a></li>
+            <li><a href="#about" class="btn btn-xl text-base w-full" data-ms="Tentang" data-en="About" x-text={t} @click="isOpen = false">Tentang</a></li>
+            <li><a href="#services" class="btn btn-xl text-base w-full" data-ms="Servis" data-en="Services" x-text={t} @click="isOpen = false">Servis</a></li>
+            <li><a href="#portfolio" class="btn btn-xl text-base w-full" data-ms="Portfolio" data-en="Portfolio" x-text={t} @click="isOpen = false">Portfolio</a></li>
+            <li><a href="#testimonials" class="btn btn-xl text-base w-full" data-ms="Testimoni" data-en="Testimonials" x-text={t} @click="isOpen = false">Testimoni</a></li>
+            <li><a href="#contact" class="btn btn-xl text-base w-full" data-ms="Hubungi Kami" data-en="Contact Us" x-text={t} @click="isOpen = false">Hubungi Kami</a></li>
+            <li>
+                <button
+                    type="button"
+                    class="btn btn-xl text-base w-full lg:w-auto"
+                    @click="$store.locale.toggle()"
+                    x-text="$store.locale.value === 'ms' ? 'EN' : 'BM'"
+                >EN</button>
+            </li>
             <li class="flex-grow-1 lg:hidden"></li>
-            <li><a href="#contact" class="btn btn-xl text-base w-full btn-primary" @click="isOpen = false">Kuotasi</a></li>
+            <li><a href="#contact" class="btn btn-xl text-base w-full btn-primary" data-ms="Kuotasi" data-en="Get Quote" x-text={t} @click="isOpen = false">Kuotasi</a></li>
         </ul>
         <button class="lg:hidden btn btn-xl btn-square shadow-xl btn-primary" @click="isOpen = true"><i class="ti ti-menu-2"></i></button>
     </div>
