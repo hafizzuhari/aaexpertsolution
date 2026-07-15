@@ -158,9 +158,9 @@ import { testimonials } from "../content/7-testimonials";
     <section class="bg-[url(/faq.webp)] bg-cover bg-center" id="faqs">
         <div class="bg-secondary/50 p-4 py-12 lg:p-16">
             <h3 class="text-xl font-bold text-primary text-center text-primary mb-12 lg:mb-16">{faq.title}</h3>
-            {faq.items.map(item => {
+            {faq.items.map((item, index) => {
                 return <div class="collapse bg-base-100 border border-base-300">
-                    <input type="radio" name="my-accordion-1" checked="checked" />
+                    <input type="radio" name="my-accordion-1" checked={index === 0} />
                     <div class="collapse-title font-semibold">{item.question}</div>
                     <div class="collapse-content text-sm">{item.answer}</div>
                 </div>
