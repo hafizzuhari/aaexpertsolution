@@ -22,28 +22,55 @@ const { company } = contact;
         <div>
             <h4 class="text-primary text-xl font-bold lg:text-start text-center">{quote.title}</h4>
             <p class="text-base-200 mb-8 lg:text-start text-center">{quote.description}</p>
-            <form onsubmit="event.preventDefault()" class="grid lg:grid-cols-3 lg:gap-2">
+            <form
+                class="grid lg:grid-cols-3 lg:gap-2"
+                x-data="{ submitting: false, sent: false, failed: false }"
+                x-on:submit.prevent={`
+                    submitting = true; sent = false; failed = false;
+                    const form = $event.target;
+                    fetch('https://api.web3forms.com/submit', {
+                        method: 'POST',
+                        headers: { 'Accept': 'application/json' },
+                        body: new FormData(form)
+                    })
+                        .then(res => res.json())
+                        .then(data => {
+                            submitting = false;
+                            if (data.success) { sent = true; form.reset(); }
+                            else { failed = true; }
+                        })
+                        .catch(() => { submitting = false; failed = true; })
+                `}
+            >
+                <input type="hidden" name="access_key" value={quote.web3formsAccessKey} />
+                <input type="hidden" name="subject" value="New Quote Request - AA Expert Solution" />
+                <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
                 {
                     quote.formFields.map(item => {
                         return <fieldset class={`fieldset ${item.type === "textarea" && "lg:col-span-3"} ${item.type === "select" && "lg:col-span-2"}`}>
-                            <legend class="fieldset-legend text-base-200">{item.label}</legend>
+                            <legend class="fieldset-legend text-base-200">{item.label}{item.required && " *"}</legend>
                             {(() => {
                                 if (item.type == "select") {
-                                    return <select class="select w-full">
+                                    return <select name={item.name} required={item.required} class="select w-full">
                                         {item.options?.map(o => {
                                             return <option value={o}>{o}</option>
                                         })}
                                     </select>
                                 }
                                 if (item.type === "textarea") {
-                                    return <textarea class="textarea w-full"></textarea>
+                                    return <textarea name={item.name} required={item.required} class="textarea w-full"></textarea>
                                 }
-                                return <input type={item.type as any} class="input w-full">
+                                return <input type={item.type as any} name={item.name} required={item.required} class="input w-full">
                             })()}
                         </fieldset>
                     })
                 }
-                <button class="btn btn-primary mt-4 col-span-full">{quote.submitButtonText}</button>
+                <button type="submit" class="btn btn-primary mt-4 col-span-full" x-bind:disabled="submitting">
+                    <span x-show="!submitting">{quote.submitButtonText}</span>
+                    <span x-show="submitting" x-cloak>Menghantar...</span>
+                </button>
+                <p x-show="sent" x-cloak class="text-success col-span-full mt-2 text-sm">Berjaya dihantar! Kami akan hubungi anda tidak lama lagi.</p>
+                <p x-show="failed" x-cloak class="text-error col-span-full mt-2 text-sm">Something went wrong — please try again or call us directly at +60 11-1887 1375.</p>
             </form>
         </div>
     </div>

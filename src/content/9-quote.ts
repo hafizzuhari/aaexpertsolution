@@ -1,6 +1,8 @@
 export const quote = {
   title: "Request a Free Quote",
   description: "Tell us about your project and we'll get back to you with a free estimate.",
+  // Get a free access key at https://web3forms.com using aaexpertsolution@gmail.com, then paste it here.
+  web3formsAccessKey: "YOUR_WEB3FORMS_ACCESS_KEY",
   formFields: [
     {
       label: "Full Name",
