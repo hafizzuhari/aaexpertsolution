@@ -24,7 +24,7 @@ import "../styles/global.css"
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
 			rel="stylesheet"
 			media="print"
 			onload="this.media='all'"
@@ -44,7 +44,7 @@ import "../styles/global.css"
 			onload="this.media='all'"
 		/>
 		<noscript>
-			<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
+			<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet" />
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.44.0/dist/tabler-icons.min.css" />
 			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 		</noscript>
@@ -64,7 +64,7 @@ import "../styles/global.css"
 	</body>
 </html>
 
-<style>
+<style is:global>
 	:root:has(input.theme-controller[value=aa-expert-solution]:checked),[data-theme="aa-expert-solution"] {
 		--color-base-100: #f5f2ec;
 		--color-base-200: #eae7e0;
@@ -114,8 +114,15 @@ import "../styles/global.css"
 	* {
 		font-family: "Montserrat", sans-serif;
 		font-optical-sizing: auto;
-		font-weight: <weight>;
+		font-weight: 400;
 		font-style: normal;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-family: "Archivo", "Montserrat", sans-serif;
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: 0.02em;
 	}
 
 	[x-cloak] {

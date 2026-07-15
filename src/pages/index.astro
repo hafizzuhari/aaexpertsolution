@@ -54,14 +54,14 @@ import { testimonials } from "../content/7-testimonials";
                 <h3 class="text-xl font-bold text-secondary text-center mb-4 lg:mb-8">{certifications.title}</h3>
                 <p class="text-secondary text-justify">{certifications.description}</p>
             </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 w-full col-span-2 gap-4">
+            <div class="grid grid-cols-1 w-full col-span-2 gap-4">
                 {
                     certifications.items.map(item => {
-                        return <div class="text-center p-4 flex flex-col bg-secondary">
-                            <div class="p-4 bg-base-200">
-                                <i class={`ti ti-${item.icon} text-9xl text-secondary`}></i>
+                        return <div class="flex items-center gap-4 bg-secondary p-4">
+                            <div class="p-3 bg-base-200 shrink-0">
+                                <i class={`ti ti-${item.icon} text-4xl text-secondary`}></i>
                             </div>
-                            <div class="mt-4 flex-grow text-primary">{item.text}</div>
+                            <div class="text-primary font-bold">{item.text}</div>
                         </div>
                     })
                 }
@@ -134,14 +134,14 @@ import { testimonials } from "../content/7-testimonials";
     <section class="p-4 py-12 lg:p-16 bg-base-200" id="portfolio">
         <h3 class="text-xl font-bold text-primary text-center text-secondary mb-4 lg:mb-8">{portfolio.title}</h3>
         <p class="text-secondary text-center mb-12 lg:mb-16">{portfolio.description}</p>
-        <div class="grid grid-cols-1 lg:grid-rows-1 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             {portfolio.items.map(item => {
                 return <div class="bg-primary grid grid-cols-1">
                     <div class="relative overflow-hidden aspect-[21/9]">
                         <img src={item.imageUrl} alt={item.title} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
                     </div>
-                    <div class="p-4">
-                        <h4 class="font-bold">{item.title}</h4>
+                    <div class="p-4 lg:p-6">
+                        <h4 class="font-bold text-lg">{item.title}</h4>
                         <div class="flex gap-2 items-center">
                             <i class="ti ti-map-pin"></i><span>{item.location}</span>
                         </div>
@@ -184,7 +184,16 @@ import { testimonials } from "../content/7-testimonials";
                             </div>
                         </div>
                     </div>
-                    <div class="p-4">"{item.quote}""</div>
+                    <div class="p-4">
+                        <div class="flex gap-1 text-primary mb-2" aria-label="5 out of 5 stars">
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                            <i class="ti ti-star"></i>
+                        </div>
+                        <p>"{item.quote}"</p>
+                    </div>
                 </div>
             })}
         </div>

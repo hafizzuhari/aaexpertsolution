@@ -1,19 +1,19 @@
 export const certifications = {
-  title: "Pensijilan dan Akreditasi",
+  title: "Komitmen Kualiti Kami",
   description:
-    "Kami komited untuk memastikan setiap projek dijalankan mengikut piawaian tertinggi industri. Dengan pensijilan rasmi dan pematuhan kepada badan berautoriti, kami memberi jaminan kualiti, keselamatan, dan kebolehpercayaan kepada setiap pelanggan.",
+    "Kami mengutamakan kualiti, keselamatan dan kepuasan pelanggan dalam setiap projek yang dijalankan — dari kerja kediaman kecil sehingga projek komersial, setiap kerja diselia rapi dari mula hingga siap.",
   items: [
     {
       icon: "certificate",
-      text: "Kontraktor Berdaftar CIDB",
+      text: "Guna Bahan & Teknik Kimpalan Berkualiti Tinggi",
     },
     {
-      icon: "certificate-2",
-      text: "Pekerja Berkimpal & Fabrikasi Bertauliah",
+      icon: "helmet",
+      text: "Amalan Keselamatan Diutamakan di Tapak Kerja",
     },
     {
-      icon: "file-certificate",
-      text: "Pematuhan Standard JKR & Pihak Berkuasa Tempatan",
+      icon: "clipboard-check",
+      text: "Pemeriksaan Kualiti Sebelum Kerja Diserahkan",
     },
   ],
 };
