@@ -1,6 +1,5 @@
 export const quote = {
-  // Get a free access key at https://web3forms.com using aaexpertsolution@gmail.com, then paste it here.
-  web3formsAccessKey: "YOUR_WEB3FORMS_ACCESS_KEY",
+  web3formsAccessKey: "d9601b0a-2df0-480e-ba7e-48199be3de6d",
   ms: {
     title: "Dapatkan Kuotasi Percuma",
     description: "Ceritakan pasal projek anda dan kami akan hubungi anda dengan anggaran percuma.",
