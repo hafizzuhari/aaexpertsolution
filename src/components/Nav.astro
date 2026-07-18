@@ -1,30 +1,36 @@
 ---
 const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
 ---
-<nav class="fixed z-10 p-4 lg:p-8 w-full bg-transparent" x-data="{ isOpen: false }">
-    <div class="w-full flex justify-between">
-        <a href="/" class="btn btn-xl btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></a>
-        <ul class="lg:flex flex-col lg:flex-row gap-0 absolute lg:relative z-10 top-0 left-0 w-screen h-screen lg:h-fit lg:w-fit bg-base-200" :class="isOpen ? 'flex' : 'hidden'">
-            <li class="flex justify-between p-4 lg:hidden">
-                <a href="/" class="btn btn-xl btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></a>
-                <button class="btn btn-xl btn-square shadow-xl btn-primary" @click="isOpen = false"><i class="ti ti-x"></i></button>
+<nav class="fixed z-30 top-0 left-0 w-full p-4 lg:px-10 lg:py-5 bg-gradient-to-b from-secondary/70 to-transparent" x-data="{ isOpen: false }">
+    <div class="w-full flex justify-between items-center">
+        <a href="/" class="flex items-center gap-3">
+            <span class="btn btn-lg btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></span>
+            <span class="hidden sm:flex flex-col leading-none text-base-100 text-sm">
+                <span>AA Expert</span>
+                <span class="text-primary">Solution</span>
+            </span>
+        </a>
+        <ul class="lg:flex flex-col lg:flex-row lg:items-center gap-1 absolute lg:relative z-10 top-0 left-0 w-screen h-screen lg:h-fit lg:w-fit bg-base-200 lg:bg-transparent p-4 lg:p-0" :class="isOpen ? 'flex' : 'hidden'">
+            <li class="flex justify-between mb-4 lg:hidden">
+                <a href="/" class="btn btn-square shadow-xl bg-[url(/logo.webp)] bg-cover bg-center"></a>
+                <button class="btn btn-square shadow-xl btn-primary" @click="isOpen = false"><i class="ti ti-x"></i></button>
             </li>
-            <li><a href="#about" class="btn btn-xl text-base w-full" data-ms="Tentang" data-en="About" x-text={t} @click="isOpen = false">Tentang</a></li>
-            <li><a href="#services" class="btn btn-xl text-base w-full" data-ms="Servis" data-en="Services" x-text={t} @click="isOpen = false">Servis</a></li>
-            <li><a href="#portfolio" class="btn btn-xl text-base w-full" data-ms="Portfolio" data-en="Portfolio" x-text={t} @click="isOpen = false">Portfolio</a></li>
-            <li><a href="#testimonials" class="btn btn-xl text-base w-full" data-ms="Testimoni" data-en="Testimonials" x-text={t} @click="isOpen = false">Testimoni</a></li>
-            <li><a href="#contact" class="btn btn-xl text-base w-full" data-ms="Hubungi Kami" data-en="Contact Us" x-text={t} @click="isOpen = false">Hubungi Kami</a></li>
+            <li><a href="#about" class="btn btn-block lg:w-auto text-sm" data-ms="Tentang" data-en="About" x-text={t} @click="isOpen = false">Tentang</a></li>
+            <li><a href="#services" class="btn btn-block lg:w-auto text-sm" data-ms="Servis" data-en="Services" x-text={t} @click="isOpen = false">Servis</a></li>
+            <li><a href="#portfolio" class="btn btn-block lg:w-auto text-sm" data-ms="Portfolio" data-en="Portfolio" x-text={t} @click="isOpen = false">Portfolio</a></li>
+            <li><a href="#testimonials" class="btn btn-block lg:w-auto text-sm" data-ms="Testimoni" data-en="Testimonials" x-text={t} @click="isOpen = false">Testimoni</a></li>
+            <li><a href="#contact" class="btn btn-block lg:w-auto text-sm" data-ms="Hubungi Kami" data-en="Contact Us" x-text={t} @click="isOpen = false">Hubungi Kami</a></li>
             <li>
                 <button
                     type="button"
-                    class="btn btn-xl text-base w-full lg:w-auto"
+                    class="btn btn-block lg:w-auto text-sm"
                     @click="$store.locale.toggle()"
                     x-text="$store.locale.value === 'ms' ? 'EN' : 'BM'"
                 >EN</button>
             </li>
-            <li class="flex-grow-1 lg:hidden"></li>
-            <li><a href="#contact" class="btn btn-xl text-base w-full btn-primary" data-ms="Kuotasi" data-en="Get Quote" x-text={t} @click="isOpen = false">Kuotasi</a></li>
+            <li class="flex-grow lg:hidden"></li>
+            <li><a href="#contact" class="btn btn-block lg:w-auto text-sm btn-primary" data-ms="Kuotasi" data-en="Get Quote" x-text={t} @click="isOpen = false">Kuotasi</a></li>
         </ul>
-        <button class="lg:hidden btn btn-xl btn-square shadow-xl btn-primary" @click="isOpen = true"><i class="ti ti-menu-2"></i></button>
+        <button class="lg:hidden btn btn-square shadow-xl btn-primary" @click="isOpen = true"><i class="ti ti-menu-2"></i></button>
     </div>
 </nav>
