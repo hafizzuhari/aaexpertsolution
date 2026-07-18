@@ -16,7 +16,7 @@ export const contact = {
   items: [
     {
       type: "address",
-      label: "37, Jalan P2/9, Seksyen 2, Bandar Teknologi Kajang, Semenyih 43500 Selangor",
+      label: "9a, Jalan Sentosa 2, Taman Sentosa, 43000 Kajang, Selangor",
       icon: "map-pin",
     },
     {
