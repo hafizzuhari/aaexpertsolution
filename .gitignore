@@ -25,3 +25,6 @@ pnpm-debug.log*
 
 # internal planning notes - not for the public repo
 .requirements/
+.claude/
+
+context.md
