@@ -4,31 +4,36 @@ import { quote } from "../content/9-quote";
 
 const { company } = contact;
 const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
+const year = new Date().getFullYear();
 ---
-<div class="bg-secondary" id="contact">
-    <div class="p-12 lg:p-16 flex flex-col-reverse lg:flex-row justify-between gap-12 lg:gap-16">
-        <div class="flex flex-col justify-start">
-            <div class="btn btn-square bg-cover bg-center mb-4 lg:mb-8" style={`background-image: url(${company.logo})`}></div>
-            <div class="text-primary font-bold">{company.name}</div>
-            <div class="text-base-200 text-xs mb-4 lg:mb-8" data-ms={contact.ms.tagline} data-en={contact.en.tagline} x-text={t}>{contact.ms.tagline}</div>
-            <div class="flex flex-col gap-2">
+<div class="aa-tex-dark bg-secondary" id="contact">
+    <div class="p-6 py-12 lg:p-16 grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 max-w-6xl mx-auto">
+        <div class="aa-reveal flex flex-col">
+            <div class="inline-flex items-center gap-3 mb-4">
+                <span class="w-7 h-0.5 bg-primary"></span>
+                <span class="text-primary text-xs tracking-widest" data-ms="Mari Berbual" data-en="Let's Talk" x-text={t}>Mari Berbual</span>
+            </div>
+            <div class="btn btn-square bg-cover bg-center mb-4 lg:mb-6" style={`background-image: url(${company.logo})`}></div>
+            <div class="text-primary font-bold text-lg">{company.name}</div>
+            <div class="text-base-200 text-xs mb-6 lg:mb-8" data-ms={contact.ms.tagline} data-en={contact.en.tagline} x-text={t}>{contact.ms.tagline}</div>
+            <div class="flex flex-col gap-3">
                 {contact.items.map(item => {
-                    return <div class="flex gap-2 lg:gap-4 items-center">
-                        <i class={`ti ti-${item.icon} text-xl text-primary`}></i>
+                    return <div class="flex gap-3 lg:gap-4 items-center">
+                        <i class={`ti ti-${item.icon} text-xl text-primary shrink-0`}></i>
                         <span class="text-base-200 text-xs">{item.label}</span>
                     </div>
                 })}
-                <div class="flex gap-2 lg:gap-4 items-center">
-                    <i class="ti ti-clock text-xl text-primary"></i>
+                <div class="flex gap-3 lg:gap-4 items-center">
+                    <i class="ti ti-clock text-xl text-primary shrink-0"></i>
                     <span class="text-base-200 text-xs" data-ms={contact.ms.hours} data-en={contact.en.hours} x-text={t}>{contact.ms.hours}</span>
                 </div>
             </div>
         </div>
-        <div>
-            <h4 class="text-primary text-xl font-bold lg:text-start text-center" data-ms={quote.ms.title} data-en={quote.en.title} x-text={t}>{quote.ms.title}</h4>
-            <p class="text-base-200 mb-8 lg:text-start text-center" data-ms={quote.ms.description} data-en={quote.en.description} x-text={t}>{quote.ms.description}</p>
+        <div class="aa-reveal">
+            <h4 class="text-primary text-2xl lg:text-3xl font-bold mb-2" data-ms={quote.ms.title} data-en={quote.en.title} x-text={t}>{quote.ms.title}</h4>
+            <p class="text-base-200 mb-7" data-ms={quote.ms.description} data-en={quote.en.description} x-text={t}>{quote.ms.description}</p>
             <form
-                class="grid lg:grid-cols-3 lg:gap-2"
+                class="grid lg:grid-cols-2 gap-4"
                 x-data="{ submitting: false, sent: false, failed: false }"
                 x-on:submit.prevent={`
                     submitting = true; sent = false; failed = false;
@@ -53,8 +58,8 @@ const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
                 {
                     quote.ms.formFields.map((item, index) => {
                         const enItem = quote.en.formFields[index];
-                        return <fieldset class={`fieldset ${item.type === "textarea" && "lg:col-span-3"} ${item.type === "select" && "lg:col-span-2"}`}>
-                            <legend class="fieldset-legend text-base-200">
+                        return <fieldset class={`fieldset ${item.type === "textarea" ? "lg:col-span-2" : ""} ${item.type === "select" ? "lg:col-span-2" : ""}`}>
+                            <legend class="fieldset-legend text-base-200 text-xs">
                                 <span data-ms={item.label} data-en={enItem.label} x-text={t}>{item.label}</span>
                                 {item.required && " *"}
                             </legend>
@@ -67,14 +72,14 @@ const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
                                     </select>
                                 }
                                 if (item.type === "textarea") {
-                                    return <textarea name={item.name} required={item.required} class="textarea w-full"></textarea>
+                                    return <textarea name={item.name} required={item.required} rows={4} class="textarea w-full"></textarea>
                                 }
                                 return <input type={item.type as any} name={item.name} required={item.required} class="input w-full">
                             })()}
                         </fieldset>
                     })
                 }
-                <button type="submit" class="btn btn-primary mt-4 col-span-full" x-bind:disabled="submitting">
+                <button type="submit" class="btn btn-primary mt-2 col-span-full uppercase tracking-wide" x-bind:disabled="submitting">
                     <span x-show="!submitting" data-ms={quote.ms.submitButtonText} data-en={quote.en.submitButtonText} x-text={t}>{quote.ms.submitButtonText}</span>
                     <span x-show="submitting" x-cloak data-ms="Menghantar..." data-en="Sending..." x-text={t}>Menghantar...</span>
                 </button>
@@ -83,4 +88,5 @@ const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
             </form>
         </div>
     </div>
+    <div class="border-t border-base-content/20 py-4 px-4 text-center text-base-300 text-xs">© {year} {company.name}. All rights reserved.</div>
 </div>
