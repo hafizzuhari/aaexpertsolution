@@ -1,6 +1,8 @@
 ---
+---
 import Layout from "../layouts/Layout.astro";
 import { carousel } from "../content/1-carousel";
+import { stats } from "../content/1.1-stats";
 import { whyUs } from "../content/2-why-us"
 import { certifications } from "../content/2.1-certifications";
 import { coverageArea } from "../content/2.2-coverage";
@@ -9,207 +11,383 @@ import { services } from "../content/4-services";
 import { portfolio } from "../content/5-portfolio";
 import { faq } from "../content/6-faq";
 import { testimonials } from "../content/7-testimonials";
+import { contact } from "../content/8-contact";
 
 const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
+const phoneItem = contact.items.find((item) => item.type === "phone");
+const waNumber = phoneItem ? phoneItem.label.replace(/\D/g, "") : "";
 ---
 
 <Layout>
-    <section class="h-screen" id="home">
-        <div class="carousel h-full w-full">
+    <section
+        id="home"
+        class="h-screen min-h-[600px] relative overflow-hidden bg-secondary"
+        x-data={`{ slide: 0, total: ${carousel.backgroundUrls.length} }`}
+        x-init={`setInterval(() => slide = (slide + 1) % total, 6500)`}
+    >
+        {
+            carousel.backgroundUrls.map((bg, index) => (
+                <div
+                    class="absolute inset-0 bg-cover bg-center"
+                    style={`background-image:url(${bg}); animation: aaKen 9s ease forwards, aaFade 1s ease; display:${index === 0 ? "block" : "none"};`}
+                    x-show={`slide === ${index}`}
+                />
+            ))
+        }
+        <div class="absolute inset-0" style="background: linear-gradient(90deg, rgba(20,20,20,0.85) 0%, rgba(30,30,30,0.6) 45%, rgba(30,30,30,0.25) 100%);" />
+        <div class="absolute inset-0 flex items-center px-5 sm:px-10 lg:px-24">
+            <div class="max-w-2xl">
+                <div class="flex items-center gap-3 mb-5">
+                    <span class="w-8 h-0.5 bg-primary" />
+                    <span class="text-accent text-xs tracking-[0.2em] font-black uppercase">
+                        <i class="ti ti-map-pin text-sm mr-1" />
+                        <span data-ms="Bengkel di Kajang, Selangor" data-en="Workshop in Kajang, Selangor" x-text={t}>Bengkel di Kajang, Selangor</span>
+                    </span>
+                </div>
+                {
+                    carousel.backgroundUrls.map((_, index) => {
+                        const ms = carousel.ms[index];
+                        const en = carousel.en[index];
+                        return (
+                            <div style={index === 0 ? "" : "display:none"} x-show={`slide === ${index}`}>
+                                <h1 class="text-4xl sm:text-5xl lg:text-7xl text-base-100 leading-[1.02] mb-5" data-ms={ms.title} data-en={en.title} x-text={t}>{ms.title}</h1>
+                                <p class="text-base sm:text-lg lg:text-xl text-base-300 max-w-xl leading-relaxed mb-8" data-ms={ms.subtitle} data-en={en.subtitle} x-text={t}>{ms.subtitle}</p>
+                            </div>
+                        );
+                    })
+                }
+                <div class="flex flex-wrap gap-3 mb-8">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="ti ti-file-text" />
+                        <span data-ms="Dapatkan Kuotasi Percuma" data-en="Get a Free Quote" x-text={t}>Dapatkan Kuotasi Percuma</span>
+                    </a>
+                    <a href={`https://wa.me/${waNumber}`} target="_blank" rel="noopener" class="btn btn-outline border-base-100 text-base-100 hover:border-[#25d366] hover:text-[#25d366]">
+                        <i class="ti ti-brand-whatsapp" />
+                        <span data-ms="WhatsApp Kami" data-en="WhatsApp Us" x-text={t}>WhatsApp Kami</span>
+                    </a>
+                </div>
+                <div class="flex flex-wrap gap-x-6 gap-y-2">
+                    <div class="flex items-center gap-2 text-base-300 text-sm"><i class="ti ti-circle-check text-primary text-lg" /><span data-ms="Lawatan tapak percuma" data-en="Free site visit" x-text={t}>Lawatan tapak percuma</span></div>
+                    <div class="flex items-center gap-2 text-base-300 text-sm"><i class="ti ti-circle-check text-primary text-lg" /><span data-ms="Siap dalam 5–14 hari" data-en="Done in 5–14 days" x-text={t}>Siap dalam 5–14 hari</span></div>
+                    <div class="flex items-center gap-2 text-base-300 text-sm"><i class="ti ti-circle-check text-primary text-lg" /><span data-ms="Kerja dijamin tahan lama" data-en="Built to last, guaranteed" x-text={t}>Kerja dijamin tahan lama</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="hidden lg:flex absolute right-8 xl:right-16 top-1/2 -translate-y-1/2 flex-col gap-3">
+            <button @click="slide = (slide - 1 + total) % total" class="btn btn-square bg-base-100/10 border-base-100/30 text-base-100 hover:bg-primary hover:border-primary"><i class="ti ti-chevron-up" /></button>
+            <button @click="slide = (slide + 1) % total" class="btn btn-square bg-base-100/10 border-base-100/30 text-base-100 hover:bg-primary hover:border-primary"><i class="ti ti-chevron-down" /></button>
+        </div>
+        <div class="absolute bottom-8 left-5 sm:left-10 lg:left-24 flex gap-2.5">
             {
-                carousel.backgroundUrls.map((bg, index) => {
-                    const ms = carousel.ms[index];
-                    const en = carousel.en[index];
+                carousel.backgroundUrls.map((_, index) => (
+                    <button
+                        @click={`slide = ${index}`}
+                        class="w-9 h-1"
+                        :class={`slide === ${index} ? 'bg-primary' : 'bg-base-100/40'`}
+                    />
+                ))
+            }
+        </div>
+    </section>
+
+    <section class="aa-tex-dark bg-[#242424] px-4 py-9 lg:px-16 lg:py-14">
+        <div class="max-w-5xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+            {
+                stats.ms.map((s, index) => {
+                    const en = stats.en[index];
                     return (
-                        <div id={`slide-${index}`}
-                            class="carousel-item h-full w-full bg-cover bg-center relative"
-                            style={`background-image: url(${bg})`}
-                        >
-                            <div class="h-full w-full bg-secondary/50 flex flex-col justify-center items-center p-8">
-                                <h2 class="text-5xl text-center font-bold text-primary mb-4" data-ms={ms.title} data-en={en.title} x-text={t}>{ms.title}</h2>
-                                <p class="text-lg text-center text-white" data-ms={ms.subtitle} data-en={en.subtitle} x-text={t}>{ms.subtitle}</p>
+                        <div class="aa-reveal text-center">
+                            <div class="text-4xl lg:text-6xl text-primary leading-none">
+                                <span class="aa-count" data-target={s.target}>0</span>{s.suffix}
                             </div>
-                            <div class="hidden absolute left-8 right-8 top-1/2 lg:flex -translate-y-1/2 transform justify-between">
-                                <a href={`#slide-${index - 1 < 0 ? carousel.backgroundUrls.length - 1 : index - 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-left text-secondary"></i></a>
-                                <a href={`#slide-${index + 1 >= carousel.backgroundUrls.length ? 0 : index + 1}`} class="btn btn-square btn-xs btn-base-200"><i class="ti ti-chevron-right text-secondary"></i></a>
-                            </div>
+                            <div class="text-base-300 text-xs font-semibold mt-2.5 tracking-wide" data-ms={s.label} data-en={en.label} x-text={t}>{s.label}</div>
                         </div>
                     );
                 })
             }
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-secondary" id="why-us">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16" data-ms={whyUs.ms.title} data-en={whyUs.en.title} x-text={t}>{whyUs.ms.title}</h3>
-        <div class="grid grid-cols-2 grid-rows-2 lg:grid-cols-4 lg:grid-rows-1 gap-4 lg:gap-8">
+
+    <section id="why-us" class="aa-tex-dark bg-secondary px-4 py-14 lg:px-16 lg:py-24">
+        <div class="text-center mb-11 lg:mb-16">
+            <div class="inline-flex items-center gap-3 mb-3.5">
+                <span class="w-7 h-0.5 bg-primary" />
+                <span class="text-primary text-xs tracking-widest" data-ms="Kenapa Kami" data-en="Why Us" x-text={t}>Kenapa Kami</span>
+                <span class="w-7 h-0.5 bg-primary" />
+            </div>
+            <h3 class="text-2xl lg:text-4xl text-base-100" data-ms={whyUs.ms.title} data-en={whyUs.en.title} x-text={t}>{whyUs.ms.title}</h3>
+        </div>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-7 max-w-6xl mx-auto">
             {
                 whyUs.icons.map((icon, i) => {
                     const msItem = whyUs.ms.items[i];
                     const enItem = whyUs.en.items[i];
-                    return <div class="p-4 lg:p-8 bg-base-200 shadow-xl grid grid-rows-3">
-                        <i class={`ti ti-${icon} text-5xl text-primary`}></i>
-                        <h4 class="font-bold" data-ms={msItem.title} data-en={enItem.title} x-text={t}>{msItem.title}</h4>
-                        <p data-ms={msItem.description} data-en={enItem.description} x-text={t}>{msItem.description}</p>
-                    </div>
+                    return (
+                        <div class="aa-reveal aa-lift relative flex flex-col gap-3.5 bg-base-200 shadow-xl p-6 lg:p-9 overflow-hidden">
+                            <span class="absolute top-2 right-4 text-5xl text-primary/15">{String(i + 1).padStart(2, "0")}</span>
+                            <i class={`ti ti-${icon} text-4xl lg:text-5xl text-primary`} />
+                            <h4 class="font-bold" data-ms={msItem.title} data-en={enItem.title} x-text={t}>{msItem.title}</h4>
+                            <p class="text-sm leading-relaxed" data-ms={msItem.description} data-en={enItem.description} x-text={t}>{msItem.description}</p>
+                        </div>
+                    );
                 })
             }
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-primary" id="certifications">
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
-            <div class="col-span-1">
-                <h3 class="text-xl font-bold text-secondary text-center mb-4 lg:mb-8" data-ms={certifications.ms.title} data-en={certifications.en.title} x-text={t}>{certifications.ms.title}</h3>
-                <p class="text-secondary text-justify" data-ms={certifications.ms.description} data-en={certifications.en.description} x-text={t}>{certifications.ms.description}</p>
+
+    <section id="certifications" class="aa-tex-orange bg-primary px-4 py-14 lg:px-16 lg:py-24">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-9 lg:gap-14 max-w-6xl mx-auto items-center">
+            <div class="aa-reveal col-span-1">
+                <div class="inline-flex items-center gap-3 mb-4">
+                    <span class="w-7 h-0.5 bg-secondary" />
+                    <span class="text-secondary text-xs tracking-widest" data-ms="Jaminan Kualiti" data-en="Quality Promise" x-text={t}>Jaminan Kualiti</span>
+                </div>
+                <h3 class="text-2xl lg:text-4xl text-secondary mb-4 leading-tight" data-ms={certifications.ms.title} data-en={certifications.en.title} x-text={t}>{certifications.ms.title}</h3>
+                <p class="text-secondary/80 leading-relaxed" data-ms={certifications.ms.description} data-en={certifications.en.description} x-text={t}>{certifications.ms.description}</p>
             </div>
-            <div class="grid grid-cols-1 w-full col-span-2 gap-4">
+            <div class="grid grid-cols-1 w-full col-span-2 gap-3.5">
                 {
                     certifications.icons.map((icon, i) => {
                         const msItem = certifications.ms.items[i];
                         const enItem = certifications.en.items[i];
-                        return <div class="flex items-center gap-4 bg-secondary p-4">
-                            <div class="p-3 bg-base-200 shrink-0">
-                                <i class={`ti ti-${icon} text-4xl text-secondary`}></i>
+                        return (
+                            <div class="aa-reveal aa-lift flex items-center gap-4 lg:gap-5 bg-secondary p-5 shadow-xl">
+                                <div class="w-[52px] h-[52px] p-3 bg-primary shrink-0 flex items-center justify-center">
+                                    <i class={`ti ti-${icon} text-3xl text-secondary`} />
+                                </div>
+                                <div class="text-base-100 font-bold leading-snug text-sm" data-ms={msItem.text} data-en={enItem.text} x-text={t}>{msItem.text}</div>
                             </div>
-                            <div class="text-primary font-bold" data-ms={msItem.text} data-en={enItem.text} x-text={t}>{msItem.text}</div>
-                        </div>
+                        );
                     })
                 }
             </div>
         </div>
     </section>
-    <section class="bg-[url(/faq.webp)] bg-cover bg-center" id="faqs"
+
+    <section
+        id="coverage"
+        class="bg-[url(/faq.webp)] bg-cover bg-center"
         x-data="{ map: null, selectedLocationIndex: 0 }"
         x-init={`
             const locations = ${JSON.stringify(coverageArea.locations)};
-            this.map = L.map('map').setView([locations[0].coordinates.lat, locations[0].coordinates.lng], 13);
+            this.map = L.map('map').setView([locations[0].coordinates.lat, locations[0].coordinates.lng], 12);
             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { maxZoom: 20 }).addTo(this.map);
             locations.forEach((location) => {
                 const marker = L
                     .marker([location.coordinates.lat, location.coordinates.lng])
                     .addTo(this.map)
-                    .bindPopup(location.name+", "+location.state);
-                marker.on('click', function () {
-                    this.map.setView(marker.getLatLng(), this.map.getZoom(), {
-                    animate: true
-                    });
+                    .bindPopup(location.name + ", " + location.state);
+                marker.on('click', () => {
+                    this.map.setView(marker.getLatLng(), this.map.getZoom(), { animate: true });
                 });
-            })
+            });
         `}
     >
-        <div class="bg-secondary/50 p-4 py-12 lg:p-16">
-            <h3 class="text-xl font-bold text-primary text-center mb-4 lg:mb-8" data-ms={coverageArea.ms.title} data-en={coverageArea.en.title} x-text={t}>{coverageArea.ms.title}</h3>
-            <p class="text-base-200 text-center mb-12 lg:mb-16" data-ms={coverageArea.ms.description} data-en={coverageArea.en.description} x-text={t}>{coverageArea.ms.description}</p>
-            <div class="grid grid-cols-3">
-                <div class="lg:col-span-1 col-span-3 flex flex-col">
+        <div class="bg-secondary/70 px-4 py-14 lg:px-16 lg:py-24">
+            <div class="text-center mb-9 lg:mb-14">
+                <div class="inline-flex items-center gap-3 mb-3.5">
+                    <span class="w-7 h-0.5 bg-primary" />
+                    <span class="text-primary text-xs tracking-widest" data-ms="Liputan Kami" data-en="Where We Work" x-text={t}>Liputan Kami</span>
+                    <span class="w-7 h-0.5 bg-primary" />
+                </div>
+                <h3 class="text-2xl lg:text-4xl text-base-100 mb-3.5" data-ms={coverageArea.ms.title} data-en={coverageArea.en.title} x-text={t}>{coverageArea.ms.title}</h3>
+                <p class="text-base-200 max-w-2xl mx-auto" data-ms={coverageArea.ms.description} data-en={coverageArea.en.description} x-text={t}>{coverageArea.ms.description}</p>
+            </div>
+            <div class="aa-reveal grid grid-cols-1 lg:grid-cols-3 max-w-5xl mx-auto shadow-2xl">
+                <div class="lg:col-span-1 flex flex-col">
                     {
-                        coverageArea.locations.map((item, i) => {
-                            return <button
-                                class="btn p-8 bg-base-200"
+                        coverageArea.locations.map((item, i) => (
+                            <button
+                                class="flex items-center gap-2.5 px-5 py-4 border-b border-base-300 text-left text-sm font-semibold cursor-pointer"
+                                :class={`selectedLocationIndex === ${i} ? 'bg-primary text-white' : 'bg-base-200 text-secondary'`}
                                 @click={`
-                                    this.map.setView([${item.coordinates.lat}, ${item.coordinates.lng}], 20);
-                                    this.selectedLocationIndex = ${i}
-                                `}>
+                                    this.map.setView([${item.coordinates.lat}, ${item.coordinates.lng}], 14, { animate: true });
+                                    this.selectedLocationIndex = ${i};
+                                `}
+                            >
+                                <i class="ti ti-map-pin" />
                                 {`${item.name}, ${item.state}`}
                             </button>
-                        })
+                        ))
                     }
                 </div>
-                <div class="col-span-2">
-                    <div id="map" class="h-full w-full"></div>
-                </div>
+                <div id="map" class="lg:col-span-2 min-h-[320px] lg:min-h-[460px] bg-base-200" />
             </div>
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-base-200" id="about">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-8" data-ms={about.ms.title} data-en={about.en.title} x-text={t}>{about.ms.title}</h3>
-        <p class="text-secondary text-justify" style="white-space: pre-line" data-ms={about.ms.description} data-en={about.en.description} x-text={t}>{about.ms.description}</p>
+
+    <section id="about" class="bg-base-200 px-4 py-14 lg:px-16 lg:py-24">
+        <div class="max-w-5xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-9 lg:gap-16 items-center">
+            <div class="aa-reveal aa-media relative overflow-hidden aspect-[4/5] shadow-2xl">
+                <img src="/carousel/carousel-2.webp" alt="AA Expert Solution workshop" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+                <div class="absolute left-0 bottom-0 bg-primary text-secondary px-6 py-4">
+                    <div class="text-3xl leading-none">EST.</div>
+                    <div class="font-bold text-xs tracking-wide">Kajang, Selangor</div>
+                </div>
+            </div>
+            <div class="aa-reveal">
+                <div class="inline-flex items-center gap-3 mb-4">
+                    <span class="w-7 h-0.5 bg-primary" />
+                    <span class="text-primary text-xs tracking-widest" data-ms="Kisah Kami" data-en="Our Story" x-text={t}>Kisah Kami</span>
+                </div>
+                <h3 class="text-2xl lg:text-4xl mb-6 leading-tight" data-ms={about.ms.title} data-en={about.en.title} x-text={t}>{about.ms.title}</h3>
+                <p class="leading-relaxed" style="white-space: pre-line" data-ms={about.ms.description} data-en={about.en.description} x-text={t}>{about.ms.description}</p>
+            </div>
+        </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-primary" id="services">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16 text-secondary" data-ms={services.ms.title} data-en={services.en.title} x-text={t}>{services.ms.title}</h3>
-        <div class="grid grid-cols-1 lg:grid-cols-6 gap-4 lg:gap-8">
+
+    <section id="services" class="aa-tex-orange bg-primary px-4 py-14 lg:px-16 lg:py-24">
+        <div class="text-center mb-11 lg:mb-16">
+            <div class="inline-flex items-center gap-3 mb-3.5">
+                <span class="w-7 h-0.5 bg-secondary" />
+                <span class="text-secondary text-xs tracking-widest" data-ms="Apa Kami Buat" data-en="What We Do" x-text={t}>Apa Kami Buat</span>
+                <span class="w-7 h-0.5 bg-secondary" />
+            </div>
+            <h3 class="text-2xl lg:text-4xl text-secondary" data-ms={services.ms.title} data-en={services.en.title} x-text={t}>{services.ms.title}</h3>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6 max-w-6xl mx-auto">
             {services.images.map((image, i) => {
                 const msItem = services.ms.items[i];
                 const enItem = services.en.items[i];
-                return <div class="bg-secondary grid grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
-                    <div class="row-span-2 relative overflow-hidden lg:h-32">
-                        <img src={image} alt={msItem.name} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+                return (
+                    <div class="aa-reveal aa-lift aa-media bg-secondary shadow-xl flex flex-col">
+                        <div class="relative overflow-hidden aspect-[16/10]">
+                            <img src={image} alt={msItem.name} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+                            <span class="absolute left-3.5 bottom-3 text-xs text-white bg-primary px-2.5 py-1 font-bold">{String(i + 1).padStart(2, "0")}</span>
+                        </div>
+                        <div class="p-5 lg:p-6 flex flex-col gap-2">
+                            <h4 class="text-primary text-base" data-ms={msItem.name} data-en={enItem.name} x-text={t}>{msItem.name}</h4>
+                            <p class="text-base-300 text-sm leading-relaxed" data-ms={msItem.description} data-en={enItem.description} x-text={t}>{msItem.description}</p>
+                        </div>
                     </div>
-                    <div class="p-4 lg:p-8 items-start justify-start flex flex-col h-full">
-                        <h4 class="text-primary font-bold" data-ms={msItem.name} data-en={enItem.name} x-text={t}>{msItem.name}</h4>
-                        <p class="text-base-200" data-ms={msItem.description} data-en={enItem.description} x-text={t}>{msItem.description}</p>
-                    </div>
-                </div>
+                );
             })}
         </div>
     </section>
-    <section class="p-4 py-12 lg:p-16 bg-base-200" id="portfolio">
-        <h3 class="text-xl font-bold text-primary text-center text-secondary mb-4 lg:mb-8" data-ms={portfolio.ms.title} data-en={portfolio.en.title} x-text={t}>{portfolio.ms.title}</h3>
-        <p class="text-secondary text-center mb-12 lg:mb-16" data-ms={portfolio.ms.description} data-en={portfolio.en.description} x-text={t}>{portfolio.ms.description}</p>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+    <section id="portfolio" class="bg-base-200 px-4 py-14 lg:px-16 lg:py-24">
+        <div class="text-center mb-10 lg:mb-14">
+            <div class="inline-flex items-center gap-3 mb-3.5">
+                <span class="w-7 h-0.5 bg-primary" />
+                <span class="text-primary text-xs tracking-widest" data-ms="Kerja Terbaru" data-en="Recent Work" x-text={t}>Kerja Terbaru</span>
+                <span class="w-7 h-0.5 bg-primary" />
+            </div>
+            <h3 class="text-2xl lg:text-4xl mb-3.5" data-ms={portfolio.ms.title} data-en={portfolio.en.title} x-text={t}>{portfolio.ms.title}</h3>
+            <p class="max-w-xl mx-auto" data-ms={portfolio.ms.description} data-en={portfolio.en.description} x-text={t}>{portfolio.ms.description}</p>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-7 max-w-5xl mx-auto">
             {portfolio.items.map((item, i) => {
                 const msItem = portfolio.ms.items[i];
                 const enItem = portfolio.en.items[i];
-                return <div class="bg-primary grid grid-cols-1">
-                    <div class="relative overflow-hidden aspect-[21/9]">
-                        <img src={item.imageUrl} alt={msItem.title} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
-                    </div>
-                    <div class="p-4 lg:p-6">
-                        <h4 class="font-bold text-lg" data-ms={msItem.title} data-en={enItem.title} x-text={t}>{msItem.title}</h4>
-                        <div class="flex gap-2 items-center">
-                            <i class="ti ti-map-pin"></i><span>{item.location}</span>
+                return (
+                    <div class="aa-reveal aa-lift aa-media relative overflow-hidden shadow-xl bg-secondary">
+                        <div class="relative overflow-hidden aspect-[3/2]">
+                            <img src={item.imageUrl} alt={msItem.title} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
                         </div>
-                        <div class="flex gap-2 mt-4 justify-start">
-                            {msItem.tags.map((tag, j) => {
-                                return <span class="p-2 bg-secondary text-base-200 text-xs" data-ms={tag} data-en={enItem.tags[j]} x-text={t}>{tag}</span>
-                            })}
-                        </div>
-                    </div>
-                </div>
-            })}
-        </div>
-    </section>
-    <section class="bg-[url(/faq.webp)] bg-cover bg-center" id="faqs">
-        <div class="bg-secondary/50 p-4 py-12 lg:p-16">
-            <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16" data-ms={faq.ms.title} data-en={faq.en.title} x-text={t}>{faq.ms.title}</h3>
-            {faq.ms.items.map((msItem, index) => {
-                const enItem = faq.en.items[index];
-                return <div class="collapse bg-base-100 border border-base-300">
-                    <input type="radio" name="my-accordion-1" checked={index === 0} />
-                    <div class="collapse-title font-semibold" data-ms={msItem.question} data-en={enItem.question} x-text={t}>{msItem.question}</div>
-                    <div class="collapse-content text-sm" data-ms={msItem.answer} data-en={enItem.answer} x-text={t}>{msItem.answer}</div>
-                </div>
-            })}
-        </div>
-    </section>
-    <section class="p-4 py-12 lg:p-16 bg-secondary" id="testimonials">
-        <h3 class="text-xl font-bold text-primary text-center mb-12 lg:mb-16" data-ms={testimonials.ms.title} data-en={testimonials.en.title} x-text={t}>{testimonials.ms.title}</h3>
-        <div class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-1 gap-4 lg:gap-8">
-            {testimonials.items.map(item => {
-                return <div class="bg-base-200">
-                    <div class="flex">
-                        <div class="aspect-square relative overflow-hidden p-8">
-                            <img src={item.image} alt={item.name} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
-                        </div>
-                        <div class="bg-primary flex-grow-1 p-4">
-                            <span>{item.name}</span>
-                            <div class="text-xs">
-                                <i class="ti ti-map-pin"></i>
-                                <span>{item.location}</span>
+                        <div class="absolute inset-0 flex flex-col justify-end p-6" style="background: linear-gradient(180deg, transparent 40%, rgba(20,20,20,0.92) 100%);">
+                            <h4 class="text-lg text-base-100 mb-2" data-ms={msItem.title} data-en={enItem.title} x-text={t}>{msItem.title}</h4>
+                            <div class="flex gap-1.5 items-center text-accent text-sm mb-3.5">
+                                <i class="ti ti-map-pin" /><span>{item.location}</span>
+                            </div>
+                            <div class="flex gap-2 flex-wrap">
+                                {msItem.tags.map((tag, j) => (
+                                    <span class="px-2.5 py-1 bg-primary/90 text-secondary text-xs font-bold" data-ms={tag} data-en={enItem.tags[j]} x-text={t}>{tag}</span>
+                                ))}
                             </div>
                         </div>
                     </div>
-                    <div class="p-4">
-                        <div class="flex gap-1 text-primary mb-2" aria-label="5 out of 5 stars">
-                            <i class="ti ti-star"></i>
-                            <i class="ti ti-star"></i>
-                            <i class="ti ti-star"></i>
-                            <i class="ti ti-star"></i>
-                            <i class="ti ti-star"></i>
-                        </div>
-                        <p>"{item.quote}"</p>
-                    </div>
-                </div>
+                );
             })}
         </div>
     </section>
+
+    <section id="faqs" class="bg-[url(/faq.webp)] bg-cover bg-center">
+        <div class="bg-secondary/75 px-4 py-14 lg:px-16 lg:py-24">
+            <div class="text-center mb-10 lg:mb-14">
+                <div class="inline-flex items-center gap-3 mb-3.5">
+                    <span class="w-7 h-0.5 bg-primary" />
+                    <span class="text-primary text-xs tracking-widest" data-ms="Soalan Anda" data-en="Your Questions" x-text={t}>Soalan Anda</span>
+                    <span class="w-7 h-0.5 bg-primary" />
+                </div>
+                <h3 class="text-2xl lg:text-4xl text-base-100" data-ms={faq.ms.title} data-en={faq.en.title} x-text={t}>{faq.ms.title}</h3>
+            </div>
+            <div class="max-w-3xl mx-auto flex flex-col gap-3" x-data="{ open: 0 }">
+                {faq.ms.items.map((msItem, index) => {
+                    const enItem = faq.en.items[index];
+                    return (
+                        <div class="aa-reveal bg-base-100 border-l-4" :class={`open === ${index} ? 'border-primary' : 'border-transparent'`}>
+                            <button
+                                class="w-full text-left flex justify-between items-center gap-4 px-5 py-4 lg:px-6 font-bold text-sm lg:text-base cursor-pointer"
+                                @click={`open = open === ${index} ? -1 : ${index}`}
+                            >
+                                <span data-ms={msItem.question} data-en={enItem.question} x-text={t}>{msItem.question}</span>
+                                <i class="ti text-primary text-xl shrink-0" :class={`open === ${index} ? 'ti-minus' : 'ti-plus'`} />
+                            </button>
+                            <div class="px-5 pb-5 lg:px-6 text-sm leading-relaxed" x-show={`open === ${index}`} x-cloak data-ms={msItem.answer} data-en={enItem.answer} x-text={t}>{msItem.answer}</div>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="aa-tex-dark bg-secondary px-4 py-14 lg:px-16 lg:py-24">
+        <div class="text-center mb-11 lg:mb-16">
+            <div class="inline-flex items-center gap-3 mb-3.5">
+                <span class="w-7 h-0.5 bg-primary" />
+                <span class="text-primary text-xs tracking-widest" data-ms="Kata Pelanggan" data-en="Client Words" x-text={t}>Kata Pelanggan</span>
+                <span class="w-7 h-0.5 bg-primary" />
+            </div>
+            <h3 class="text-2xl lg:text-4xl text-base-100" data-ms={testimonials.ms.title} data-en={testimonials.en.title} x-text={t}>{testimonials.ms.title}</h3>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 max-w-5xl mx-auto">
+            {testimonials.items.map(item => (
+                <div class="aa-reveal aa-lift bg-base-200 shadow-xl relative">
+                    <i class="ti ti-quote absolute top-4 right-5 text-4xl text-primary/25" />
+                    <div class="flex items-stretch">
+                        <div class="aa-media w-28 shrink-0 relative overflow-hidden">
+                            <img src={item.image} alt={item.name} loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover" />
+                        </div>
+                        <div class="bg-primary flex-1 px-5 py-4 flex flex-col justify-center">
+                            <span class="text-lg text-secondary">{item.name}</span>
+                            <div class="text-xs text-secondary/70 flex gap-1.5 items-center mt-1">
+                                <i class="ti ti-map-pin" /><span>{item.location}</span>
+                            </div>
+                            <div class="flex gap-0.5 text-secondary mt-2 text-sm" aria-label="5 out of 5 stars">
+                                <i class="ti ti-star-filled" /><i class="ti ti-star-filled" /><i class="ti ti-star-filled" /><i class="ti ti-star-filled" /><i class="ti ti-star-filled" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="italic text-sm leading-relaxed">"{item.quote}"</p>
+                    </div>
+                </div>
+            ))}
+        </div>
+    </section>
 </Layout>
+
+<script>
+    const counters = document.querySelectorAll<HTMLElement>(".aa-count");
+    if ("IntersectionObserver" in window && counters.length) {
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target as HTMLElement;
+                obs.unobserve(el);
+                const target = parseInt(el.dataset.target || "0", 10);
+                const duration = 1400;
+                const start = performance.now();
+                const step = (now: number) => {
+                    const progress = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    el.textContent = Math.round(target * eased).toString();
+                    if (progress < 1) requestAnimationFrame(step);
+                    else el.textContent = target.toString();
+                };
+                requestAnimationFrame(step);
+            });
+        }, { threshold: 0.4 });
+        counters.forEach((el) => obs.observe(el));
+    }
+</script>
