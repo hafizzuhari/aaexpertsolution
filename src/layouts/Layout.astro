@@ -2,7 +2,12 @@
 import Nav from "../components/Nav.astro"
 import Footer from "../components/Footer.astro"
 import { openGraph, seo } from "../content/0-seo"
+import { contact } from "../content/8-contact"
 import "../styles/global.css"
+
+const t = "$store.locale.value === 'ms' ? $el.dataset.ms : $el.dataset.en";
+const phoneItem = contact.items.find((item) => item.type === "phone");
+const waNumber = phoneItem ? phoneItem.label.replace(/\D/g, "") : "";
 ---
 <!doctype html>
 <html lang="ms" data-theme="aa-expert-solution" x-data x-bind:lang="$store.locale.value === 'ms' ? 'ms' : 'en'">
@@ -64,6 +69,15 @@ import "../styles/global.css"
 		<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.12/dist/cdn.min.js"></script>
 	</head>
 	<body>
+		<a
+			href={`https://wa.me/${waNumber}`}
+			target="_blank"
+			rel="noopener"
+			class="aa-wa-btn fixed right-4 bottom-4 lg:right-6 lg:bottom-6 z-40 flex items-center h-[56px] overflow-hidden rounded-full bg-[#25d366] text-white shadow-xl"
+		>
+			<span class="w-[56px] h-[56px] flex items-center justify-center shrink-0"><i class="ti ti-brand-whatsapp text-2xl"></i></span>
+			<span class="font-bold text-sm whitespace-nowrap pr-5" data-ms="Chat WhatsApp" data-en="Chat on WhatsApp" x-text={t}>Chat WhatsApp</span>
+		</a>
 		<header>
 			<Nav />
 		</header>
@@ -139,5 +153,30 @@ import "../styles/global.css"
 
 	[x-cloak] {
 		display: none !important;
+	}
+
+	.aa-tex-dark {
+		background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 26px), repeating-linear-gradient(90deg, rgba(255,255,255,0.028) 0 1px, transparent 1px 26px);
+	}
+	.aa-tex-orange {
+		background-image: repeating-linear-gradient(0deg, rgba(42,42,42,0.05) 0 1px, transparent 1px 26px), repeating-linear-gradient(90deg, rgba(42,42,42,0.05) 0 1px, transparent 1px 26px);
+	}
+
+	@keyframes aaKen { from { transform: scale(1.0); } to { transform: scale(1.12); } }
+	@keyframes aaFade { from { opacity: 0; } to { opacity: 1; } }
+	@keyframes aaRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+	@keyframes aaReveal { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: none; } }
+	@keyframes aaPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); } 50% { box-shadow: 0 0 0 12px rgba(37,211,102,0); } }
+
+	.aa-reveal { animation: aaReveal both linear; animation-timeline: view(); animation-range: entry 4% entry 38%; }
+	.aa-lift { transition: transform 0.35s ease, box-shadow 0.35s ease; }
+	.aa-lift:hover { transform: translateY(-6px); }
+	.aa-media img { transition: transform 0.6s ease; }
+	.aa-media:hover img { transform: scale(1.07); }
+	.aa-wa-btn { animation: aaPulse 2.6s infinite; }
+
+	@media (prefers-reduced-motion: reduce) {
+		.aa-reveal, .aa-wa-btn { animation: none; }
+		.aa-lift, .aa-media img { transition: none; }
 	}
 </style>
