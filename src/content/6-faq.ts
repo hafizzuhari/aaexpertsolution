@@ -12,7 +12,7 @@ export const faq = {
       },
       {
         question: "Berapa lama tempoh sesuatu projek siap?",
-        answer: "Bergantung kepada skop kerja. Kerja fabrikasi dan pemasangan selalunya 5-14 hari, manakala projek renovasi mengambil masa lebih lama — tempoh sebenar akan kami nyatakan dalam kuotasi.",
+        answer: "Bergantung kepada skop kerja. Kerja fabrikasi dan pemasangan selalunya 5-14 hari, manakala projek renovasi mengambil masa lebih lama. Tempoh sebenar akan kami nyatakan dalam kuotasi.",
       },
       {
         question: "Boleh saya minta custom design?",
@@ -33,7 +33,7 @@ export const faq = {
       },
       {
         question: "How long does a project take to complete?",
-        answer: "It depends on the scope. Fabrication and installation work usually takes 5-14 days, while renovation projects take longer — the actual timeline is stated in your quotation.",
+        answer: "It depends on the scope. Fabrication and installation work usually takes 5-14 days, while renovation projects take longer. The actual timeline is stated in your quotation.",
       },
       {
         question: "Can I request a custom design?",
