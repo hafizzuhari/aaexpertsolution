@@ -1,7 +1,8 @@
 # AA Expert Solution — Marketing Site
 
-Single-page marketing site for AA Expert Solution, an ironworks, roofing & metal
-fabrication company serving Selangor & Kuala Lumpur. Built with
+Single-page marketing site for AA Expert Solution, a construction & renovation
+contractor serving Selangor & Kuala Lumpur. Scope covers home renovation,
+roofing, general building works, and steel fabrication done in-house. Built with
 [Astro](https://astro.build), [Tailwind CSS v4](https://tailwindcss.com), and
 [daisyui](https://daisyui.com). Deployed to GitHub Pages at
 [aaexpertsolution.com](https://www.aaexpertsolution.com).

@@ -1,30 +1,30 @@
 export const carousel = {
   ms: [
     {
-      title: "Pakar Kerja Besi, Hasil Kerja Terjamin",
-      subtitle: "Pagar, grill & struktur besi ikut citarasa, tahan lama & bergaya.",
+      title: "Kontraktor Pembinaan & Renovasi Yang Anda Boleh Percaya",
+      subtitle: "Renovasi rumah, ubah suai dan kerja pembinaan — diuruskan dari perancangan hingga siap.",
     },
     {
-      title: "Bumbung Besi Berkualiti, Sesuai Untuk Semua Bangunan",
-      subtitle: "Dari bengkel ke rumah, kami pasang bumbung besi yang tahan lama & kemas.",
+      title: "Bumbung, Awning & Kerja Kalis Bocor",
+      subtitle: "Pasang baru, tukar bumbung atau baiki bocor — untuk rumah, kedai dan kilang.",
     },
     {
-      title: "Servis Kimpalan & Fabrikasi Yang Power",
-      subtitle: "Besi tempa atau keluli – kami buat ikut tempahan dengan team fabrikasi sendiri.",
+      title: "Satu Team, Dari Struktur Sampai Kemasan",
+      subtitle: "Kerja struktur dan fabrikasi kami buat sendiri — tak perlu tunggu sub-kon, siap lebih terkawal.",
     },
   ],
   en: [
     {
-      title: "Ironwork Experts, Guaranteed Results",
-      subtitle: "Fences, grilles & steel structures built to your taste, durable & stylish.",
+      title: "A Construction & Renovation Contractor You Can Rely On",
+      subtitle: "Home renovations, remodelling and building works — managed from planning through to handover.",
     },
     {
-      title: "Quality Metal Roofing, Suited For Any Building",
-      subtitle: "From workshops to homes, we install metal roofing that lasts and looks sharp.",
+      title: "Roofing, Awnings & Leak-Proofing",
+      subtitle: "New installs, re-roofing or leak repairs — for homes, shoplots and factories.",
     },
     {
-      title: "Welding & Fabrication Services That Deliver",
-      subtitle: "Wrought iron or steel — made to order with our own in-house fabrication team.",
+      title: "One Team, From Structure To Finishing",
+      subtitle: "Structural and fabrication work is done in-house — no waiting on subcontractors, tighter control on site.",
     },
   ],
   backgroundUrls: ["/carousel/carousel-1.webp", "/carousel/carousel-2.webp", "/carousel/carousel-3.webp"],

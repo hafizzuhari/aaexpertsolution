@@ -1,12 +1,12 @@
 export const contact = {
   ms: {
     title: "Hubungi Kami",
-    tagline: "Pakar Besi Anda, Berkualiti dan Dipercayai",
+    tagline: "Kontraktor Pembinaan & Renovasi Anda, Berkualiti dan Dipercayai",
     hours: "Isnin-Sabtu: 9:00 PG - 6:00 PTG",
   },
   en: {
     title: "Contact Us",
-    tagline: "Your Trusted, Quality Ironworks Expert",
+    tagline: "Your Trusted Construction & Renovation Contractor",
     hours: "Mon-Sat: 9:00 AM - 6:00 PM",
   },
   company: {
@@ -21,7 +21,7 @@ export const contact = {
     },
     {
       type: "phone",
-      label: "+60 11-1887 1375",
+      label: "+60 16-504 1904",
       icon: "phone",
     },
     {
