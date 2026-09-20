@@ -8,11 +8,11 @@ export const faq = {
       },
       {
         question: "Apa jenis material yang digunakan?",
-        answer: "Kami menggunakan kualiti besi yang terbaik tapi juga menyediakan harga yang berpatutan mengikut kehendak, budget dan kesesuaian mengikut keadaan.",
+        answer: "Kami menggunakan bahan berkualiti untuk setiap jenis kerja, dan menyediakan pilihan harga yang berpatutan mengikut kehendak, budget dan kesesuaian mengikut keadaan tapak.",
       },
       {
-        question: "Berapa lama tempoh hasil kerja fabrikasi siap?",
-        answer: "Tempoh untuk projek fabrikasi selalunya dalam masa 5-14 hari bergantung kepada jenis design.",
+        question: "Berapa lama tempoh sesuatu projek siap?",
+        answer: "Bergantung kepada skop kerja. Kerja fabrikasi dan pemasangan selalunya 5-14 hari, manakala projek renovasi mengambil masa lebih lama — tempoh sebenar akan kami nyatakan dalam kuotasi.",
       },
       {
         question: "Boleh saya minta custom design?",
@@ -29,11 +29,11 @@ export const faq = {
       },
       {
         question: "What kind of material do you use?",
-        answer: "We use the best quality iron while also offering affordable pricing suited to your needs, budget, and site conditions.",
+        answer: "We use quality materials suited to each type of work, with pricing options to match your needs, budget and site conditions.",
       },
       {
-        question: "How long does a fabrication job take to complete?",
-        answer: "Fabrication projects usually take 5-14 days depending on the design.",
+        question: "How long does a project take to complete?",
+        answer: "It depends on the scope. Fabrication and installation work usually takes 5-14 days, while renovation projects take longer — the actual timeline is stated in your quotation.",
       },
       {
         question: "Can I request a custom design?",
