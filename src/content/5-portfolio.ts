@@ -1,7 +1,7 @@
 export const portfolio = {
   ms: {
     title: "Hasil Projek Kami",
-    description: "Sebahagian daripada kerja yang telah kami siapkan — dari projek komersial dan industri sehingga ke rumah kediaman.",
+    description: "Sebahagian daripada kerja yang telah kami siapkan, dari projek komersial dan industri sehingga ke rumah kediaman.",
     items: [
       { title: "Pagar Perimeter Industrial", tags: ["Pagar", "Industri", "Keselamatan"] },
       { title: "Pintu Pagar Besi Tempa Tersuai", tags: ["Pintu Pagar", "Kediaman", "Besi Tempa"] },
@@ -11,7 +11,7 @@ export const portfolio = {
   },
   en: {
     title: "Our Project Results",
-    description: "A selection of work we have completed — from commercial and industrial projects through to residential homes.",
+    description: "A selection of work we have completed, from commercial and industrial projects through to residential homes.",
     items: [
       { title: "Industrial Perimeter Fencing", tags: ["Fencing", "Industrial", "Security"] },
       { title: "Custom Wrought Iron Gate", tags: ["Gate", "Residential", "Wrought Iron"] },
